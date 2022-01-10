@@ -1,6 +1,24 @@
 /* Write your global styles here, in PostCSS syntax */
 
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+	--pink: #bb7e77;
+	--red: #68322c;
+	--blue: #163d55;
+	--white: #fffcf2;
+	--black: #252422;
+}
+
 html,
 body {
-	background-color: grey;
+	color: var(--white);
+	font-weight: 400;
+	font-family: 'Ubuntu', sans-serif;
+	background-color: var(--black);
+}
+
+a {
+	color: var(--pink);
+	text-decoration: none;
 }
