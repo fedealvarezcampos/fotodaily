@@ -15,6 +15,10 @@
 </footer>
 
 <style lang="postcss">
+	main {
+		display: flex;
+		place-content: center;
+	}
 	footer {
 		display: flex;
 		place-content: center;
