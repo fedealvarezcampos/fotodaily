@@ -12,13 +12,40 @@
 
 html,
 body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
 	color: var(--white);
 	font-weight: 400;
 	font-family: 'Ubuntu', sans-serif;
 	background-color: var(--black);
 }
 
+body {
+	overflow-x: hidden;
+}
+
+* {
+	box-sizing: border-box;
+}
+
 a {
 	color: var(--pink);
 	text-decoration: none;
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+
+	@media (max-width: 600px) {
+		width: 6px;
+	}
+}
+
+::-webkit-scrollbar-track {
+	background: var(--red);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--pink);
 }

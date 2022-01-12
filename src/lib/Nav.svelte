@@ -1,5 +1,5 @@
 <script>
-	let siteTitle = 'MY SITE';
+	let siteTitle = 'FOTODAILY';
 </script>
 
 <header>
@@ -18,17 +18,27 @@
 
 <style lang="postcss">
 	header {
+		position: sticky;
+		top: 0;
 		display: flex;
+		height: 6rem;
+		place-items: center;
 		place-content: center;
+		font-weight: 700;
+		border-bottom: 6px solid var(--red);
+		background-color: var(--black);
+		z-index: 3;
+
+		p {
+			&:first-child {
+				font-size: 1.4rem;
+			}
+		}
 
 		ul {
 			display: flex;
 			gap: 0.8rem;
 			list-style: none;
-		}
-
-		li {
-			font-weight: 800;
 		}
 	}
 </style>
