@@ -2,17 +2,19 @@
 	export let newsItem;
 </script>
 
-<li>
-	<a class="newsItem" href={newsItem.attributes.link} target="__blank">
+<li class="newsItem">
+	<a href={newsItem.attributes.link} target="__blank">
 		<div class="titleContainer">
 			<span>{newsItem.attributes.title}</span>
 			<span>{newsItem.attributes.site}</span>
 			<span>{new Date(newsItem.attributes.date).toDateString()}</span>
 		</div>
 		<div class="infoContainer">
-			<img src={newsItem.attributes.image} alt="" />
 			<div>
-				<p>{newsItem.attributes.preview + '...'}</p>
+				<img src={newsItem.attributes.image} alt="" />
+			</div>
+			<div>
+				<p>{newsItem.attributes.preview.slice(0, 150) + '...'}</p>
 			</div>
 		</div>
 	</a>
@@ -22,20 +24,26 @@
 	.newsItem {
 		display: flex;
 		flex-direction: column;
+		place-content: center;
 		gap: 1rem;
+		height: 25rem;
+		width: clamp(28rem, 50vw, 30rem);
 		padding: 2rem 1.8rem;
-		color: var(--white);
 		border-radius: 8px;
 		border: 6px solid var(--red);
 		background-color: var(--black);
 		box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+
+		a {
+			color: var(--white);
+		}
 
 		p {
 			margin: 0;
 		}
 
 		img {
-			height: 9rem;
+			height: 10rem;
 			width: 12rem;
 			object-fit: cover;
 			border-radius: 8px;

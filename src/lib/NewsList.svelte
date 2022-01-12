@@ -44,10 +44,11 @@
 		padding: 0;
 		margin: 3rem 0 3rem 0;
 		display: flex;
-		flex-direction: column;
+		place-content: center;
+		flex-wrap: wrap;
 		gap: 1.8rem;
 		list-style: none;
-		width: clamp(20rem, 70vw, 42rem);
+		/* width: clamp(20rem, 70vw, 80rem); */
 	}
 
 	.loader {
