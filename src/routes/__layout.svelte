@@ -18,6 +18,7 @@
 	.bodyContainer {
 		display: flex;
 	}
+
 	main {
 		width: 100%;
 		display: flex;

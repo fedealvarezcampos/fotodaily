@@ -5,8 +5,8 @@
 <li>
 	<a class="newsItem" href={newsItem.attributes.link} target="__blank">
 		<div class="titleContainer">
-			<span>{newsItem.attributes.site}</span>
 			<span>{newsItem.attributes.title}</span>
+			<span>{newsItem.attributes.site}</span>
 			<span>{new Date(newsItem.attributes.date).toDateString()}</span>
 		</div>
 		<div class="infoContainer">
@@ -54,16 +54,17 @@
 			display: flex;
 			flex-direction: column;
 			margin-bottom: 0.6rem;
-			gap: 0.6rem;
+			gap: 0.3rem;
 
 			span {
 				&:first-child {
-					font-size: 1.6rem;
+					font-size: 1.5rem;
 					font-weight: 700;
+					padding-bottom: 0.2rem;
 				}
 
 				&:nth-child(2) {
-					font-size: 1.3rem;
+					font-size: 1.2rem;
 				}
 
 				&:last-child {
@@ -78,6 +79,7 @@
 			display: flex;
 			place-items: center;
 			gap: 1.6rem;
+			font-size: 1.1rem;
 			word-break: break-word;
 		}
 	}

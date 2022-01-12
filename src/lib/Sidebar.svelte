@@ -1,11 +1,21 @@
 <script>
+	import { fetchOrder } from '../stores';
+
+	$: order = $fetchOrder;
+
+	const changeOrder = () => {
+		fetchOrder.set(order === 'DESC' ? 'ASC' : 'DESC');
+	};
 </script>
 
 <div class="sidebar">
-	<button>ORDER</button>
 	<nav>
 		<ul>
-			<li>ORDER</li>
+			<li>
+				<span>SORT BY</span><button on:click={changeOrder}
+					>{order === 'ASC' ? 'NEWEST' : 'OLDEST'}</button
+				>
+			</li>
 		</ul>
 	</nav>
 </div>
@@ -20,12 +30,24 @@
 		padding-top: 3rem;
 		height: calc(100vh - 6rem);
 		width: 16rem;
+
 		border-right: 4px solid var(--red);
 
 		ul {
 			margin: 0;
 			padding: 0;
 			list-style: none;
+		}
+
+		li {
+			display: flex;
+			flex-direction: column;
+			place-items: center;
+			gap: 0.4rem;
+
+			span:first-child {
+				font-size: 1.2rem;
+			}
 		}
 	}
 </style>

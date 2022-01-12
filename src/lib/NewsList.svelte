@@ -1,35 +1,37 @@
 <script>
 	import axios from 'axios';
+	import { fetchOrder } from '../stores';
 	import NewsItem from './NewsItem.svelte';
 
 	const hostURL = import.meta.env.VITE_HOSTURL;
 
+	$: order = $fetchOrder;
 	let newsItems = [];
-	let order = 'DESC';
 	let error = null;
 
-	$: fetcher = async () => {
+	let loading;
+
+	const fetcher = async () => {
 		try {
+			loading = true;
+
 			const res = await axios.get(`${hostURL}/api/newsitems?sort=date:${order}`);
 			newsItems = res?.data.data;
 		} catch (e) {
 			error = e;
+		} finally {
+			loading = false;
 		}
 	};
 
 	$: order && fetcher();
-
-	const changeOrder = () => {
-		order = order === 'DESC' ? 'ASC' : 'DESC';
-	};
 </script>
 
 {#if error !== null}
 	{error.message}
-{:else if !newsItems.length}
+{:else if loading}
 	<span class="loader">Loading...</span>
 {:else}
-	<button on:click={changeOrder}>ORDER</button>
 	<ul class="newsList">
 		{#each newsItems as newsItem}
 			<NewsItem {newsItem} />
