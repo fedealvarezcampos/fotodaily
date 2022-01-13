@@ -12,8 +12,8 @@
 	<nav>
 		<ul>
 			<li>
-				<span>SORT BY</span><button on:click={changeOrder}
-					>{order === 'ASC' ? 'NEWEST' : 'OLDEST'}</button
+				<span>VIEWING</span><button on:click={changeOrder}
+					>{order === 'ASC' ? 'OLDEST' : 'NEWEST'}</button
 				>
 			</li>
 		</ul>

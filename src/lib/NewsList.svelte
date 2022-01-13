@@ -48,7 +48,7 @@
 		flex-wrap: wrap;
 		gap: 1.8rem;
 		list-style: none;
-		/* width: clamp(20rem, 70vw, 80rem); */
+		max-width: 120rem;
 	}
 
 	.loader {
