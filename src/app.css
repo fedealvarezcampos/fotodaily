@@ -32,6 +32,11 @@ body {
 a {
 	color: var(--pink);
 	text-decoration: none;
+
+	&:hover {
+		color: var(--white);
+		transition: color 200ms;
+	}
 }
 
 button {

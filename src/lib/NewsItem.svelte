@@ -5,7 +5,7 @@
 <li class="newsItem">
 	<a href={newsItem.attributes.link} target="__blank">
 		<div class="titleContainer">
-			<span>{newsItem.attributes.title}</span>
+			<span>{newsItem.attributes.title.slice(0, 120)}</span>
 			<span>{newsItem.attributes.site}</span>
 			<span>{new Date(newsItem.attributes.date).toDateString()}</span>
 		</div>
@@ -18,16 +18,19 @@
 			</div>
 		</div>
 	</a>
+	<div class="buttons">
+		<button><img src="./images/like.svg" alt="like button" /></button>
+		<button><img src="./images/archive.svg" alt="like button" /></button>
+	</div>
 </li>
 
 <style lang="postcss">
 	.newsItem {
+		position: relative;
 		display: flex;
 		flex-direction: column;
-		place-content: center;
-		gap: 1rem;
-		height: 25rem;
-		width: clamp(28rem, 50vw, 30rem);
+		height: 28rem;
+		width: 30rem;
 		padding: 2rem 1.8rem;
 		border-radius: 8px;
 		border: 6px solid var(--red);
@@ -35,6 +38,11 @@
 		box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 
 		a {
+			height: 20rem;
+			display: flex;
+			flex-direction: column;
+			place-content: center;
+			gap: 1.6rem;
 			color: var(--white);
 		}
 
@@ -42,19 +50,11 @@
 			margin: 0;
 		}
 
-		img {
-			height: 10rem;
-			width: 12rem;
-			object-fit: cover;
-			border-radius: 8px;
-			border: 2px solid var(--white);
-		}
-
 		&:hover {
 			cursor: pointer;
 			user-select: none;
-			filter: brightness(1.06);
-			border: 6px solid var(--pink);
+			filter: brightness(1.08);
+			/* border: 6px solid var(--pink); */
 			transition: all 250ms;
 		}
 
@@ -66,13 +66,14 @@
 
 			span {
 				&:first-child {
-					font-size: 1.5rem;
+					font-size: 1.3rem;
 					font-weight: 700;
 					padding-bottom: 0.2rem;
 				}
 
 				&:nth-child(2) {
 					font-size: 1.2rem;
+					padding-left: 0.1rem;
 				}
 
 				&:last-child {
@@ -89,6 +90,44 @@
 			gap: 1.6rem;
 			font-size: 1.1rem;
 			word-break: break-word;
+
+			img {
+				height: 10rem;
+				width: 12rem;
+				object-fit: cover;
+				border-radius: 8px;
+				border: 2px solid var(--white);
+			}
+		}
+
+		.buttons {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			padding: 0.5rem;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			gap: 2rem;
+			border-top: 1px solid var(--red);
+
+			button {
+				display: flex;
+				border-radius: 12px;
+				border: unset;
+				background-color: unset;
+			}
+
+			img {
+				width: 1.8rem;
+				border: unset;
+
+				&:hover {
+					filter: invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%)
+						contrast(85%);
+					transition: all 80ms;
+				}
+			}
 		}
 	}
 </style>
