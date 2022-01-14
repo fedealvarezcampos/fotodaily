@@ -36,6 +36,7 @@
 		border: 6px solid var(--red);
 		background-color: var(--black);
 		box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+		user-select: none;
 
 		a {
 			height: 20rem;
@@ -52,9 +53,7 @@
 
 		&:hover {
 			cursor: pointer;
-			user-select: none;
-			filter: brightness(1.08);
-			/* border: 6px solid var(--pink); */
+			filter: contrast(1.04);
 			transition: all 250ms;
 		}
 
@@ -87,7 +86,7 @@
 		.infoContainer {
 			display: flex;
 			place-items: center;
-			gap: 1.6rem;
+			gap: 1.5rem;
 			font-size: 1.1rem;
 			word-break: break-word;
 
@@ -95,8 +94,8 @@
 				height: 10rem;
 				width: 12rem;
 				object-fit: cover;
-				border-radius: 8px;
-				border: 2px solid var(--white);
+				border-radius: 4px;
+				border: 3px solid var(--red);
 			}
 		}
 
@@ -108,18 +107,18 @@
 			width: 100%;
 			display: flex;
 			justify-content: center;
-			gap: 2rem;
+			gap: 1.4rem;
 			border-top: 1px solid var(--red);
 
 			button {
 				display: flex;
-				border-radius: 12px;
+				place-items: center;
 				border: unset;
 				background-color: unset;
 			}
 
 			img {
-				width: 1.8rem;
+				width: 1.6rem;
 				border: unset;
 
 				&:hover {
