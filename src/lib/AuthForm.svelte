@@ -1,6 +1,6 @@
 <script>
 	import axios from 'axios';
-	import { debug } from 'svelte/internal';
+	import { isAuthed } from '../stores';
 
 	const hostURL = import.meta.env.VITE_HOSTURL;
 
@@ -9,10 +9,6 @@
 	let confirmPassword;
 
 	let err;
-
-	const handleSubmit = () => {
-		console.log('something');
-	};
 
 	const handleRegistration = async () => {
 		try {
@@ -27,6 +23,10 @@
 			});
 
 			if (error) throw error;
+
+			if (data?.jwt) {
+				isAuthed.set(true);
+			}
 
 			localStorage.user = JSON.stringify({
 				jwt: data?.jwt,
