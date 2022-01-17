@@ -1,9 +1,10 @@
 <script>
 	import axios from 'axios';
+	import { hostURL } from '../host';
 	import { fetchOrder } from '../stores';
-	import NewsItem from './NewsItem.svelte';
 
-	const hostURL = import.meta.env.VITE_HOSTURL;
+	import NewsItem from './NewsItem.svelte';
+	import Loading from './Loading.svelte';
 
 	$: order = $fetchOrder;
 	let newsItems = [];
@@ -11,10 +12,9 @@
 
 	let loading;
 
-	const fetcher = async () => {
+	const fetchNews = async () => {
 		try {
 			loading = true;
-
 			const res = await axios.get(`${hostURL}/api/newsitems?sort=date:${order}`);
 			newsItems = res?.data.data;
 		} catch (e) {
@@ -24,13 +24,13 @@
 		}
 	};
 
-	$: order && fetcher();
+	$: order && fetchNews();
 </script>
 
 {#if error !== null}
 	{error.message}
 {:else if loading}
-	<span class="loader">Loading...</span>
+	<Loading />
 {:else}
 	<ul class="newsList">
 		{#each newsItems as newsItem}
@@ -49,9 +49,5 @@
 		gap: 1.8rem;
 		list-style: none;
 		max-width: 120rem;
-	}
-
-	.loader {
-		font-size: 1.8rem;
 	}
 </style>
