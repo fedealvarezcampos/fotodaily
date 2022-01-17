@@ -1,5 +1,51 @@
 <script>
+	import axios from 'axios';
+	import { onMount } from 'svelte';
+	import { hostURL } from '../host';
+
 	export let newsItem;
+
+	let isLiked;
+
+	$: heartColor = isLiked
+		? 'invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%) contrast(85%)'
+		: 'none';
+
+	const { jwt: token } = JSON.parse(localStorage.getItem('user'));
+
+	console.log(token);
+
+	let likes;
+
+	let loading;
+	let error;
+
+	const fetchLikes = async () => {
+		try {
+			loading = true;
+			const res = await axios.get(`${hostURL}/api/newsitems/${newsItem.id}/likes`);
+
+			isLiked = res?.data?.data?.attributes?.isLiked;
+		} catch (e) {
+			error = e;
+		} finally {
+			loading = false;
+		}
+	};
+
+	const likePost = async () => {
+		try {
+			const res = await axios.post(`${hostURL}/api/newsitems/${newsItem.id}/likes`, '', {
+				headers: { Authorization: `Bearer ${token}` }
+			});
+
+			console.log(res);
+		} catch (e) {
+			error = e;
+		}
+	};
+
+	onMount(async () => fetchLikes());
 </script>
 
 <li class="newsItem">
@@ -18,10 +64,20 @@
 			</div>
 		</div>
 	</a>
-	<div class="buttons">
-		<button><img src="./images/like.svg" alt="like button" /></button>
-		<button><img src="./images/archive.svg" alt="like button" /></button>
-	</div>
+	{#if !loading}
+		<div class="buttons">
+			<span>
+				<button on:click={likePost}
+					><img
+						style="--heartColor: {heartColor}"
+						src="./images/like.svg"
+						alt="like button"
+					/></button
+				>{newsItem.attributes.likes}
+			</span>
+			<button><img src="./images/archive.svg" alt="like button" /></button>
+		</div>
+	{/if}
 </li>
 
 <style lang="postcss">
@@ -110,6 +166,14 @@
 			gap: 1.4rem;
 			border-top: 1px solid var(--red);
 
+			span {
+				display: flex;
+				place-items: center;
+				font-weight: 700;
+				font-size: 1.25rem;
+				color: var(--pink);
+			}
+
 			button {
 				display: flex;
 				place-items: center;
@@ -120,10 +184,16 @@
 			img {
 				width: 1.6rem;
 				border: unset;
+				filter: var(--heartColor);
 
 				&:hover {
 					filter: invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%)
 						contrast(85%);
+					transition: all 80ms;
+				}
+
+				&:active {
+					filter: brightness(400%);
 					transition: all 80ms;
 				}
 			}
