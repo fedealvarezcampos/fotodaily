@@ -29,6 +29,10 @@ body {
 	box-sizing: border-box;
 }
 
+p {
+	margin: 0;
+}
+
 a {
 	color: var(--pink);
 	text-decoration: none;
