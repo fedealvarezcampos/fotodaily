@@ -11,9 +11,7 @@
 		? 'invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%) contrast(85%)'
 		: 'none';
 
-	const { jwt: token } = JSON.parse(localStorage.getItem('user'));
-
-	console.log(token);
+	const token = undefined ?? JSON.parse(localStorage.getItem('user'))?.jwt;
 
 	let likes;
 
