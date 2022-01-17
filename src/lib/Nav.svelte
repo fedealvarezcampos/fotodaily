@@ -1,11 +1,10 @@
 <script>
 	import axios from 'axios';
+	import { hostURL } from '../host';
 	import { onMount } from 'svelte';
 	import { isAuthed } from '../stores';
 	import Modal from '$lib/Modal.svelte';
 	import AuthForm from '$lib/AuthForm.svelte';
-
-	const hostURL = import.meta.env.VITE_HOSTURL;
 
 	let siteTitle = '📷 FOTODAILY';
 	let isMounted;
@@ -52,7 +51,7 @@
 </script>
 
 <header>
-	<p>{siteTitle}</p>
+	<p><a href="/">{siteTitle}</a></p>
 	<nav>
 		<ul>
 			<li>
@@ -92,6 +91,10 @@
 				position: relative;
 				margin-left: auto;
 				font-size: 1.4rem;
+			}
+
+			a {
+				color: var(--white);
 			}
 		}
 

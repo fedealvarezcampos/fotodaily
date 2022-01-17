@@ -1,8 +1,7 @@
 <script>
 	import axios from 'axios';
+	import { hostURL } from '../host';
 	import { isAuthed } from '../stores';
-
-	const hostURL = import.meta.env.VITE_HOSTURL;
 
 	let email;
 	let password;
