@@ -8,7 +8,7 @@
 
 	let siteTitle = '📷 FOTODAILY';
 	let isMounted;
-	let showModal;
+	let showModal = false;
 
 	onMount(() => {
 		isMounted = true;
@@ -28,7 +28,7 @@
 		fixBody('');
 	}
 
-	const checkStorage = async () => {
+	$: checkIfLogged = async () => {
 		try {
 			const storedUser = JSON.parse(localStorage.user);
 			const { jwt } = storedUser;
@@ -47,7 +47,12 @@
 		}
 	};
 
-	$: isMounted && checkStorage();
+	const logOut = () => {
+		localStorage.clear('user');
+		isAuthed.set(false);
+	};
+
+	$: isMounted && checkIfLogged();
 </script>
 
 <header>
@@ -62,14 +67,17 @@
 			</li>
 		</ul>
 	</nav>
-	{#if !$isAuthed}
-		<button on:click|preventDefault={toggleModal}>LOG IN</button>
-	{:else}
-		<button on:click|preventDefault={toggleModal}>YOUR NEWS</button>
-	{/if}
+	<span class="btnContainer">
+		{#if !$isAuthed}
+			<button on:click|preventDefault={toggleModal}>LOG IN</button>
+		{:else}
+			<button on:click|preventDefault={logOut}>LOG OUT</button>
+			<button on:click|preventDefault={toggleModal}>YOUR NEWS</button>
+		{/if}
+	</span>
 </header>
 <Modal {showModal} on:click={toggleModal}>
-	<AuthForm />
+	<AuthForm {toggleModal} />
 </Modal>
 
 <style lang="postcss">
@@ -80,7 +88,7 @@
 		padding: 0 4rem;
 		height: 6rem;
 		place-items: center;
-		place-content: center;
+		justify-content: space-between;
 		border-bottom: 6px solid var(--red);
 		background-color: var(--black);
 		font-weight: 700;
@@ -89,7 +97,7 @@
 		p {
 			&:first-child {
 				position: relative;
-				margin-left: auto;
+				/* margin-right: auto; */
 				font-size: 1.4rem;
 			}
 
@@ -106,7 +114,13 @@
 
 		button {
 			width: 4rem;
-			margin-left: auto;
+		}
+
+		.btnContainer {
+			width: 9rem;
+			display: flex;
+			place-content: flex-end;
+			gap: 1rem;
 		}
 	}
 </style>

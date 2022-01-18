@@ -12,9 +12,11 @@
 	<nav>
 		<ul>
 			<li>
-				<span>VIEWING</span><button on:click={changeOrder}
-					>{order === 'ASC' ? 'OLDEST' : 'NEWEST'}</button
-				>
+				<span>VIEWING</span>
+				<button on:click={changeOrder}>
+					{order === 'ASC' ? 'OLDEST' : 'NEWEST'}
+				</button>
+				<button on:click={changeOrder}> MOST LIKED </button>
 			</li>
 		</ul>
 	</nav>
@@ -43,7 +45,11 @@
 			display: flex;
 			flex-direction: column;
 			place-items: center;
-			gap: 0.4rem;
+			gap: 0.8rem;
+
+			button {
+				max-width: 4.6rem;
+			}
 
 			span:first-child {
 				font-size: 1.2rem;

@@ -1,5 +1,5 @@
 <script>
-	export let showModal = false;
+	export let showModal;
 </script>
 
 {#if showModal}
