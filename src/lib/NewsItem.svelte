@@ -5,39 +5,27 @@
 
 	export let newsItem;
 
-	let isLiked;
+	let loading;
+
+	let isLiked = newsItem?.attributes.isLiked;
+	let likes = newsItem?.attributes.likes;
 
 	$: heartColor = isLiked
 		? 'invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%) contrast(85%)'
 		: 'none';
 
-	const token = undefined ?? JSON.parse(localStorage.getItem('user'))?.jwt;
-
-	let likes;
-
-	let loading;
 	let error;
-
-	const fetchLikes = async () => {
-		try {
-			loading = true;
-			const res = await axios.get(`${hostURL}/api/newsitems/${newsItem.id}/likes`);
-
-			isLiked = res?.data?.data?.attributes?.isLiked;
-		} catch (e) {
-			error = e;
-		} finally {
-			loading = false;
-		}
-	};
 
 	const likePost = async () => {
 		try {
+			const token = JSON.parse(localStorage.getItem('user'))?.jwt;
+
 			const res = await axios.post(`${hostURL}/api/newsitems/${newsItem.id}/likes`, '', {
 				headers: { Authorization: `Bearer ${token}` }
 			});
 
-			console.log(res);
+			isLiked = res?.data?.data?.attributes?.isLiked;
+			likes = res?.data?.data?.attributes?.likes;
 		} catch (e) {
 			error = e;
 		}
@@ -71,7 +59,7 @@
 						src="./images/like.svg"
 						alt="like button"
 					/></button
-				>{newsItem.attributes.likes}
+				>{likes}
 			</span>
 			<button><img src="./images/archive.svg" alt="like button" /></button>
 		</div>

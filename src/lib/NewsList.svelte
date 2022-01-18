@@ -15,7 +15,19 @@
 	const fetchNews = async () => {
 		try {
 			loading = true;
-			const res = await axios.get(`${hostURL}/api/newsitems?sort=date:${order}`);
+
+			const token = JSON.parse(localStorage.getItem('user'))?.jwt;
+
+			let res;
+
+			if (token) {
+				res = await axios.get(`${hostURL}/api/newsitems?sort=date:${order}`, {
+					headers: { Authorization: `Bearer ${token}` }
+				});
+			} else {
+				res = await axios.get(`${hostURL}/api/newsitems?sort=date:${order}`);
+			}
+
 			newsItems = res?.data.data;
 		} catch (e) {
 			error = e;
