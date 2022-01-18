@@ -3,11 +3,15 @@
 	import { hostURL } from '../host';
 	import { isAuthed } from '../stores';
 
+	export let toggleModal;
+
 	let email;
 	let password;
 	let confirmPassword;
 
-	let err;
+	let err = '';
+
+	let registrationForm = false;
 
 	const handleRegistration = async () => {
 		try {
@@ -33,14 +37,42 @@
 				email: data?.user?.email,
 				confirmed: data?.user?.confirmed
 			});
+
+			toggleModal();
 		} catch (error) {
-			err = error.message;
+			err = error.response.data.error.message;
+		}
+	};
+
+	const handleLogin = async () => {
+		try {
+			const { data, error } = await axios.post(`${hostURL}/api/auth/local`, {
+				identifier: email,
+				password: password
+			});
+
+			if (error) throw error;
+
+			if (data?.jwt) {
+				isAuthed.set(true);
+			}
+
+			localStorage.user = JSON.stringify({
+				jwt: data?.jwt,
+				userId: data?.user?.id,
+				email: data?.user?.email,
+				confirmed: data?.user?.confirmed
+			});
+
+			toggleModal();
+		} catch (error) {
+			err = error.response.data.error.message;
 		}
 	};
 </script>
 
-<form action="/" on:submit|preventDefault={handleRegistration}>
-	<span>REGISTER</span>
+<form action="/" on:submit|preventDefault={registrationForm ? handleRegistration : handleLogin}>
+	<span>{registrationForm ? 'REGISTER' : 'LOG IN'}</span>
 	<div class="inputs">
 		<label for="mail">
 			Your email
@@ -50,13 +82,19 @@
 			Your password
 			<input bind:value={password} type="password" name="pass" id="pass" />
 		</label>
-		<label for="confirmPass">
-			Confirm password
-			<input bind:value={confirmPassword} type="password" name="confirmPass" id="confirmPass" />
-		</label>
+		{#if registrationForm}
+			<label for="confirmPass">
+				Confirm password
+				<input bind:value={confirmPassword} type="password" name="confirmPass" id="confirmPass" />
+			</label>
+		{:else}
+			<span class="toRegistrationLink" on:click={() => (registrationForm = true)}
+				>...or register first</span
+			>
+		{/if}
 	</div>
 	{err}
-	<button>SIGN IN</button>
+	<button>{registrationForm ? 'SIGN UP' : 'LOG IN'}</button>
 </form>
 
 <style lang="postcss">
@@ -84,6 +122,19 @@
 				display: flex;
 				flex-direction: column;
 				gap: 0.6rem;
+			}
+		}
+
+		.toRegistrationLink {
+			width: fit-content;
+			cursor: pointer;
+			text-decoration: underline;
+			font-size: 1.1rem;
+			font-style: italic;
+
+			&:hover {
+				color: var(--pink);
+				transition: color 150ms;
 			}
 		}
 	}
