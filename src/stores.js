@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
 
-export const fetchOrder = writable('DESC');
+export const fetchOptions = writable({ order: 'DESC', filter: 'date' });
+
+export const loading = writable(false);
 
 //* AUTH
 
