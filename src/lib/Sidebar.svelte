@@ -1,10 +1,21 @@
 <script>
-	import { fetchOrder } from '../stores';
+	import { fetchOptions } from '../stores';
 
-	$: order = $fetchOrder;
+	$: order = $fetchOptions.order;
+
+	let isOrderBtnActive = true;
 
 	const changeOrder = () => {
-		fetchOrder.set(order === 'DESC' ? 'ASC' : 'DESC');
+		if (order === 'DESC') {
+			fetchOptions.set({ order: 'ASC', filter: 'date' });
+		} else {
+			fetchOptions.set({ order: 'DESC', filter: 'date' });
+		}
+	};
+
+	const filterByLikes = () => {
+		isOrderBtnActive = false;
+		fetchOptions.set({ order: 'DESC', filter: 'likes' });
 	};
 </script>
 
@@ -12,11 +23,11 @@
 	<nav>
 		<ul>
 			<li>
-				<span>VIEWING</span>
-				<button on:click={changeOrder}>
+				<span>SORTING BY</span>
+				<button class={isOrderBtnActive && 'active'} on:click={changeOrder}>
 					{order === 'ASC' ? 'OLDEST' : 'NEWEST'}
 				</button>
-				<button on:click={changeOrder}> MOST LIKED </button>
+				<button on:click={filterByLikes}>POPULAR</button>
 			</li>
 		</ul>
 	</nav>
@@ -48,12 +59,20 @@
 			gap: 0.8rem;
 
 			button {
-				max-width: 4.6rem;
+				width: 5.4rem;
+
+				&:focus {
+					background-color: var(--pink);
+				}
 			}
 
 			span:first-child {
 				font-size: 1.2rem;
 			}
 		}
+	}
+
+	.active {
+		background-color: var(--pink);
 	}
 </style>

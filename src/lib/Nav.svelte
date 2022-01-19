@@ -1,7 +1,4 @@
 <script>
-	import axios from 'axios';
-	import { hostURL } from '../host';
-	import { onMount } from 'svelte';
 	import { isAuthed } from '../stores';
 	import Modal from '$lib/Modal.svelte';
 	import AuthForm from '$lib/AuthForm.svelte';
@@ -10,14 +7,11 @@
 	let isMounted;
 	let showModal = false;
 
-	onMount(() => {
-		isMounted = true;
-	});
-
 	const toggleModal = () => {
 		showModal = !showModal;
 	};
 
+	//* no modal scrolling
 	const fixBody = (mode) => {
 		document.body.style.overflow = mode;
 	};
@@ -28,35 +22,13 @@
 		fixBody('');
 	}
 
-	$: checkIfLogged = async () => {
-		try {
-			const storedUser = JSON.parse(localStorage.user);
-			const { jwt } = storedUser;
-
-			const { data, error } = await axios.get(`${hostURL}/api/users/me`, {
-				headers: {
-					Authorization: `Bearer ${jwt}`
-				}
-			});
-
-			if (error) throw error;
-
-			data?.confirmed && isAuthed.set(true);
-		} catch (error) {
-			localStorage.clear('user');
-		}
-	};
-
 	const logOut = () => {
 		localStorage.clear('user');
 		isAuthed.set(false);
 	};
-
-	$: isMounted && checkIfLogged();
 </script>
 
 <header>
-	<p><a href="/">{siteTitle}</a></p>
 	<nav>
 		<ul>
 			<li>
@@ -67,6 +39,7 @@
 			</li>
 		</ul>
 	</nav>
+	<p><a href="/">{siteTitle}</a></p>
 	<span class="btnContainer">
 		{#if !$isAuthed}
 			<button on:click|preventDefault={toggleModal}>LOG IN</button>
@@ -95,7 +68,7 @@
 		z-index: 3;
 
 		p {
-			&:first-child {
+			&:nth-child(2) {
 				position: relative;
 				/* margin-right: auto; */
 				font-size: 1.4rem;
@@ -108,7 +81,8 @@
 
 		ul {
 			display: flex;
-			gap: 0.8rem;
+			gap: 1rem;
+			font-size: 1.1rem;
 			list-style: none;
 		}
 

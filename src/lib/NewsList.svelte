@@ -1,16 +1,21 @@
 <script>
 	import axios from 'axios';
+	import { fetchOptions, isAuthed } from '../stores';
 	import { hostURL } from '../host';
-	import { fetchOrder } from '../stores';
-
 	import NewsItem from './NewsItem.svelte';
 	import Loading from './Loading.svelte';
+	import { onMount } from 'svelte';
 
-	$: order = $fetchOrder;
+	$: order = $fetchOptions.order;
+	$: filter = $fetchOptions.filter;
+
+	let isMounted;
 	let newsItems = [];
 	let error = null;
 
 	let loading;
+
+	onMount(() => (isMounted = true));
 
 	const fetchNews = async () => {
 		try {
@@ -21,11 +26,11 @@
 			let res;
 
 			if (token) {
-				res = await axios.get(`${hostURL}/api/newsitems?sort=date:${order}`, {
+				res = await axios.get(`${hostURL}/api/newsitems?sort=${filter}:${order}`, {
 					headers: { Authorization: `Bearer ${token}` }
 				});
 			} else {
-				res = await axios.get(`${hostURL}/api/newsitems?sort=date:${order}`);
+				res = await axios.get(`${hostURL}/api/newsitems?sort=${filter}:${order}`);
 			}
 
 			newsItems = res?.data.data;
@@ -36,12 +41,11 @@
 		}
 	};
 
-	$: order && fetchNews();
+	// $: $isAuthed && fetchNews();
+	$: isMounted && $fetchOptions && fetchNews();
 </script>
 
-{#if error !== null}
-	{error.message}
-{:else if loading}
+{#if loading}
 	<Loading />
 {:else}
 	<ul class="newsList">

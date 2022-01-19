@@ -1,7 +1,7 @@
 <script>
 	import axios from 'axios';
-	import { onMount } from 'svelte';
 	import { hostURL } from '../host';
+	import { isAuthed } from '../stores';
 
 	export let newsItem;
 
@@ -10,6 +10,7 @@
 	let isLiked = newsItem?.attributes.isLiked;
 	let likes = newsItem?.attributes.likes;
 
+	// CSS for like hearts
 	$: heartColor = isLiked
 		? 'invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%) contrast(85%)'
 		: 'none';
@@ -30,8 +31,6 @@
 			error = e;
 		}
 	};
-
-	onMount(async () => fetchLikes());
 </script>
 
 <li class="newsItem">
