@@ -1,8 +1,9 @@
 <script>
 	import '../app.css';
 	import axios from 'axios';
-	import { hostURL } from '../host';
 	import { onMount } from 'svelte';
+	import { hostURL } from '../host';
+	import { page } from '$app/stores';
 	import { isAuthed } from '../stores';
 	import Nav from '$lib/Nav.svelte';
 	import Sidebar from '$lib/Sidebar.svelte';
@@ -12,6 +13,8 @@
 	onMount(() => {
 		isMounted = true;
 	});
+
+	$: currentPath = $page.url.pathname;
 
 	const checkIfLogged = async () => {
 		try {
@@ -41,7 +44,10 @@
 <Nav />
 
 <div class="bodyContainer">
-	<Sidebar />
+	{#if currentPath !== '/about'}
+		<Sidebar />
+	{/if}
+
 	<main>
 		<slot />
 	</main>

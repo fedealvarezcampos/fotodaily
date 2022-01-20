@@ -1,12 +1,11 @@
 <script>
 	import axios from 'axios';
-	import { fetchOptions, isAuthed } from '../stores';
+	import { onMount } from 'svelte';
+	import { fetchOptions, fetchNewsTrigger } from '../stores';
 	import { hostURL } from '../host';
 	import NewsItem from './NewsItem.svelte';
 	import Loading from './Loading.svelte';
-	import { onMount } from 'svelte';
 
-	$: order = $fetchOptions.order;
 	$: filter = $fetchOptions.filter;
 
 	let isMounted;
@@ -17,7 +16,7 @@
 
 	onMount(() => (isMounted = true));
 
-	const fetchNews = async () => {
+	export const fetchNews = async () => {
 		try {
 			loading = true;
 
@@ -26,11 +25,11 @@
 			let res;
 
 			if (token) {
-				res = await axios.get(`${hostURL}/api/newsitems?sort=${filter}:${order}`, {
+				res = await axios.get(`${hostURL}/api/newsitems?sort=${filter}:DESC`, {
 					headers: { Authorization: `Bearer ${token}` }
 				});
 			} else {
-				res = await axios.get(`${hostURL}/api/newsitems?sort=${filter}:${order}`);
+				res = await axios.get(`${hostURL}/api/newsitems?sort=${filter}:DESC`);
 			}
 
 			newsItems = res?.data.data;
@@ -41,8 +40,8 @@
 		}
 	};
 
-	// $: $isAuthed && fetchNews();
 	$: isMounted && $fetchOptions && fetchNews();
+	$: $fetchNewsTrigger && fetchNews();
 </script>
 
 {#if loading}

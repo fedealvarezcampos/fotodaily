@@ -1,14 +1,22 @@
 <script>
 	import axios from 'axios';
 	import { hostURL } from '../host';
-	import { isAuthed } from '../stores';
 
 	export let newsItem;
 
 	let loading;
 
-	let isLiked = newsItem?.attributes.isLiked;
-	let likes = newsItem?.attributes.likes;
+	let {
+		//
+		isLiked,
+		likes,
+		title,
+		site,
+		date,
+		link,
+		image,
+		preview
+	} = newsItem?.attributes;
 
 	// CSS for like hearts
 	$: heartColor = isLiked
@@ -34,18 +42,18 @@
 </script>
 
 <li class="newsItem">
-	<a href={newsItem.attributes.link} target="__blank">
+	<a href={link} target="__blank">
 		<div class="titleContainer">
-			<span>{newsItem.attributes.title.slice(0, 120)}</span>
-			<span>{newsItem.attributes.site}</span>
-			<span>{new Date(newsItem.attributes.date).toDateString()}</span>
+			<span>{title.length > 95 ? title.slice(0, 90) + ' [...]' : title}</span>
+			<span>{site}</span>
+			<span>{new Date(date).toDateString()}</span>
 		</div>
 		<div class="infoContainer">
 			<div>
-				<img src={newsItem.attributes.image} alt="" />
+				<img src={image} alt="" />
 			</div>
 			<div>
-				<p>{newsItem.attributes.preview.slice(0, 150) + '...'}</p>
+				<p>{preview.slice(0, 150) + '...'}</p>
 			</div>
 		</div>
 	</a>
@@ -174,11 +182,13 @@
 				&:hover {
 					filter: invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%)
 						contrast(85%);
+					transform: scale(1.1);
 					transition: all 80ms;
 				}
 
 				&:active {
 					filter: brightness(400%);
+					transform: scale(1);
 					transition: all 80ms;
 				}
 			}

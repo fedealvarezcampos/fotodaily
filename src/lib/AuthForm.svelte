@@ -1,7 +1,7 @@
 <script>
 	import axios from 'axios';
 	import { hostURL } from '../host';
-	import { isAuthed } from '../stores';
+	import { isAuthed, fetchNewsTrigger } from '../stores';
 
 	export let toggleModal;
 
@@ -64,6 +64,7 @@
 				confirmed: data?.user?.confirmed
 			});
 
+			fetchNewsTrigger.set('login');
 			toggleModal();
 		} catch (error) {
 			err = error.response.data.error.message;
