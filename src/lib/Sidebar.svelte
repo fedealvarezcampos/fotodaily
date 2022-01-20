@@ -1,21 +1,18 @@
 <script>
-	import { fetchOptions } from '../stores';
+	import { fetchOptions, activeButton } from '../stores';
 
-	$: order = $fetchOptions.order;
-
-	let isOrderBtnActive = true;
-
-	const changeOrder = () => {
-		if (order === 'DESC') {
-			fetchOptions.set({ order: 'ASC', filter: 'date' });
-		} else {
+	const filterByDate = () => {
+		if ($fetchOptions.filter !== 'date') {
+			activeButton.set('new');
 			fetchOptions.set({ order: 'DESC', filter: 'date' });
 		}
 	};
 
 	const filterByLikes = () => {
-		isOrderBtnActive = false;
-		fetchOptions.set({ order: 'DESC', filter: 'likes' });
+		if ($fetchOptions.filter !== 'likes') {
+			activeButton.set('popular');
+			fetchOptions.set({ order: 'DESC', filter: 'likes' });
+		}
 	};
 </script>
 
@@ -24,10 +21,10 @@
 		<ul>
 			<li>
 				<span>SORTING BY</span>
-				<button class={isOrderBtnActive && 'active'} on:click={changeOrder}>
-					{order === 'ASC' ? 'OLDEST' : 'NEWEST'}
-				</button>
-				<button on:click={filterByLikes}>POPULAR</button>
+				<button class={$activeButton === 'new' && 'active'} on:click={filterByDate}>NEW</button>
+				<button class={$activeButton === 'popular' && 'active'} on:click={filterByLikes}
+					>POPULAR</button
+				>
 			</li>
 		</ul>
 	</nav>
@@ -60,10 +57,6 @@
 
 			button {
 				width: 5.4rem;
-
-				&:focus {
-					background-color: var(--pink);
-				}
 			}
 
 			span:first-child {
