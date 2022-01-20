@@ -56,6 +56,11 @@
 <style lang="postcss">
 	.bodyContainer {
 		display: flex;
+
+		@media (max-width: 800px) {
+			flex-direction: column;
+			gap: 1.5rem;
+		}
 	}
 
 	main {

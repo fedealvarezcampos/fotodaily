@@ -64,5 +64,9 @@
 		gap: 1.8rem;
 		list-style: none;
 		max-width: 120rem;
+
+		@media (max-width: 800px) {
+			margin: 0;
+		}
 	}
 </style>

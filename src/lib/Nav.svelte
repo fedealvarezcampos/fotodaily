@@ -61,11 +61,14 @@
 		font-weight: 700;
 		z-index: 3;
 
+		@media (max-width: 800px) {
+			padding: 0 1rem;
+		}
+
 		p {
 			&:nth-child(2) {
 				position: relative;
-				/* margin-right: auto; */
-				font-size: 1.4rem;
+				font-size: clamp(0.8rem, 4vw, 1.4rem);
 			}
 
 			a {
@@ -78,10 +81,19 @@
 			gap: 1rem;
 			font-size: 1.1rem;
 			list-style: none;
+
+			@media (max-width: 800px) {
+				gap: 0.5rem;
+				font-size: 0.8rem;
+			}
 		}
 
 		button {
 			width: 4rem;
+
+			@media (max-width: 800px) {
+				width: 3rem;
+			}
 		}
 
 		.btnContainer {
@@ -89,6 +101,11 @@
 			display: flex;
 			place-content: flex-end;
 			gap: 1rem;
+
+			@media (max-width: 800px) {
+				width: 7rem;
+				/* place-content: unset; */
+			}
 		}
 	}
 </style>

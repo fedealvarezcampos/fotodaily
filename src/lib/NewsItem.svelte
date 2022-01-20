@@ -87,6 +87,11 @@
 		box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 		user-select: none;
 
+		@media (max-width: 800px) {
+			height: fit-content;
+			width: 90vw;
+		}
+
 		a {
 			height: 20rem;
 			display: flex;
@@ -94,6 +99,11 @@
 			place-content: center;
 			gap: 1.6rem;
 			color: var(--white);
+
+			@media (max-width: 800px) {
+				gap: 0.8rem;
+				height: fit-content;
+			}
 		}
 
 		p {
@@ -139,12 +149,24 @@
 			font-size: 1.1rem;
 			word-break: break-word;
 
+			@media (max-width: 800px) {
+				gap: 0.8rem;
+				padding-bottom: 3rem;
+				flex-direction: column;
+				place-content: center;
+			}
+
 			img {
 				height: 10rem;
 				width: 12rem;
 				object-fit: cover;
 				border-radius: 4px;
 				border: 3px solid var(--red);
+
+				@media (max-width: 800px) {
+					height: 10rem;
+					width: 70vw;
+				}
 			}
 		}
 

@@ -40,8 +40,19 @@
 		padding-top: 3rem;
 		height: calc(100vh - 6rem);
 		width: 16rem;
-
 		border-right: 4px solid var(--red);
+
+		@media (max-width: 800px) {
+			height: fit-content;
+			width: 100vw;
+			padding: 1.2rem;
+			flex-direction: row;
+			place-content: center;
+			border-right: unset;
+			border-bottom: 4px solid var(--red);
+			background-color: var(--black);
+			z-index: 3;
+		}
 
 		ul {
 			margin: 0;
@@ -55,12 +66,21 @@
 			place-items: center;
 			gap: 0.8rem;
 
+			@media (max-width: 800px) {
+				flex-direction: row;
+			}
+
 			button {
 				width: 5.4rem;
+
+				@media (max-width: 800px) {
+					padding: 0.3rem 1rem;
+					width: fit-content;
+				}
 			}
 
 			span:first-child {
-				font-size: 1.2rem;
+				font-size: clamp(0.8rem, 3vw, 1.2rem);
 			}
 		}
 	}
