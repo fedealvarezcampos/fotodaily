@@ -1,12 +1,25 @@
 <script>
+	import { fade, fly } from 'svelte/transition';
+
 	export let showModal;
+
+	//* no modal scrolling
+	const fixBody = (mode) => {
+		document.body.style.overflow = mode;
+	};
 </script>
 
 {#if showModal}
-	<div class="modal">
+	<div
+		class="modal"
+		in:fly={{ y: -50, duration: 150 }}
+		out:fade={{ duration: 150 }}
+		on:introstart={() => fixBody('hidden')}
+		on:outroend={() => fixBody('')}
+	>
 		<slot />
 	</div>
-	<div class="modalBG" on:click|self />
+	<div class="modalBG" on:click|self transition:fade={{ duration: 150 }} />
 {/if}
 
 <style lang="postcss">

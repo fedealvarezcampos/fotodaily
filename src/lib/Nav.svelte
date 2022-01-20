@@ -1,30 +1,24 @@
 <script>
-	import { isAuthed } from '../stores';
+	import { onMount } from 'svelte';
+	import { isAuthed, fetchNewsTrigger } from '../stores';
 	import Modal from '$lib/Modal.svelte';
 	import AuthForm from '$lib/AuthForm.svelte';
 
 	let siteTitle = '📷 FOTODAILY';
-	let isMounted;
+
 	let showModal = false;
+	let isMounted;
+
+	onMount(() => (isMounted = true));
 
 	const toggleModal = () => {
 		showModal = !showModal;
 	};
 
-	//* no modal scrolling
-	const fixBody = (mode) => {
-		document.body.style.overflow = mode;
-	};
-
-	$: if (showModal && isMounted) {
-		fixBody('hidden');
-	} else if (isMounted) {
-		fixBody('');
-	}
-
 	const logOut = () => {
 		localStorage.clear('user');
 		isAuthed.set(false);
+		fetchNewsTrigger.set('logout');
 	};
 </script>
 
