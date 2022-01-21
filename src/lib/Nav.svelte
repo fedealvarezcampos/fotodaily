@@ -1,6 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 	import { isAuthed, fetchNewsTrigger } from '../stores';
+	import { goto } from '$app/navigation';
+
 	import Modal from '$lib/Modal.svelte';
 	import AuthForm from '$lib/AuthForm.svelte';
 
@@ -39,7 +41,7 @@
 			<button on:click|preventDefault={toggleModal}>LOG IN</button>
 		{:else}
 			<button on:click|preventDefault={logOut}>LOG OUT</button>
-			<button on:click|preventDefault={toggleModal}>YOUR NEWS</button>
+			<button on:click={() => goto('/bookmarks')}>YOUR NEWS</button>
 		{/if}
 	</span>
 </header>
@@ -104,7 +106,6 @@
 
 			@media (max-width: 800px) {
 				width: 7rem;
-				/* place-content: unset; */
 			}
 		}
 	}

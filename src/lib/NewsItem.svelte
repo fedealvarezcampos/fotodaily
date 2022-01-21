@@ -39,6 +39,18 @@
 			error = e;
 		}
 	};
+
+	const savePost = async () => {
+		try {
+			const token = JSON.parse(localStorage.getItem('user'))?.jwt;
+
+			const res = await axios.post(`${hostURL}/api/newsitems/${newsItem.id}/save`, '', {
+				headers: { Authorization: `Bearer ${token}` }
+			});
+		} catch (e) {
+			error = e;
+		}
+	};
 </script>
 
 <li class="newsItem">
@@ -64,11 +76,11 @@
 					><img
 						style="--heartColor: {heartColor}"
 						src="./images/like.svg"
-						alt="like button"
+						alt="like item"
 					/></button
 				>{likes}
 			</span>
-			<button><img src="./images/archive.svg" alt="like button" /></button>
+			<button on:click={savePost}><img src="./images/archive.svg" alt="save item" /></button>
 		</div>
 	{/if}
 </li>
@@ -89,7 +101,7 @@
 
 		@media (max-width: 800px) {
 			height: fit-content;
-			width: 90vw;
+			width: clamp(10rem, 28rem, 90vw);
 		}
 
 		a {
@@ -165,7 +177,7 @@
 
 				@media (max-width: 800px) {
 					height: 10rem;
-					width: 70vw;
+					width: clamp(8rem, 60vw, 18rem);
 				}
 			}
 		}
