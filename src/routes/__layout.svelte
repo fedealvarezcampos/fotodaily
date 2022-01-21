@@ -44,7 +44,7 @@
 <Nav />
 
 <div class="bodyContainer">
-	{#if currentPath !== '/about'}
+	{#if currentPath === '/'}
 		<Sidebar />
 	{/if}
 
