@@ -68,13 +68,20 @@
 		z-index: 3;
 
 		@media (max-width: 800px) {
-			padding: 0 1rem;
+			height: 4.8rem;
+			padding: 0 0.8rem;
+			gap: 0.8rem;
+			border-bottom: 4px solid var(--red);
 		}
 
 		p {
 			&:nth-child(2) {
 				position: relative;
-				font-size: clamp(0.8rem, 4vw, 1.4rem);
+				font-size: clamp(1rem, 4vw, 1.4rem);
+
+				@media (max-width: 800px) {
+					margin-right: auto;
+				}
 			}
 
 			a {
@@ -90,7 +97,7 @@
 
 			@media (max-width: 800px) {
 				gap: 0.5rem;
-				font-size: 0.8rem;
+				font-size: 0.6rem;
 			}
 		}
 
@@ -109,7 +116,8 @@
 			gap: 1rem;
 
 			@media (max-width: 800px) {
-				width: 7rem;
+				width: fit-content;
+				gap: 0.6rem;
 			}
 		}
 	}

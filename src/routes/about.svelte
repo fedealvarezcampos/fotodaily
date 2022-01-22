@@ -29,7 +29,11 @@
 		place-content: center;
 		flex-direction: column;
 		gap: 2rem;
-		font-size: 1.3rem;
+		font-size: clamp(1.1rem, 4vw, 1.3rem);
+
+		@media (max-width: 800px) {
+			padding: 2.2rem;
+		}
 
 		p {
 			display: flex;

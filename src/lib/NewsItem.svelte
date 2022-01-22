@@ -116,7 +116,8 @@
 
 		@media (max-width: 800px) {
 			height: fit-content;
-			width: clamp(10rem, 28rem, 90vw);
+			width: clamp(10rem, 28rem, 85vw);
+			padding: 1.4rem;
 		}
 
 		a {
@@ -151,13 +152,13 @@
 
 			span {
 				&:first-child {
-					font-size: 1.3rem;
+					font-size: clamp(1.1rem, 4vw, 1.3rem);
 					font-weight: 700;
 					padding-bottom: 0.2rem;
 				}
 
 				&:nth-child(2) {
-					font-size: 1.2rem;
+					font-size: clamp(1rem, 4vw, 1.2rem);
 					padding-left: 0.1rem;
 				}
 
@@ -173,7 +174,7 @@
 			display: flex;
 			place-items: center;
 			gap: 1.5rem;
-			font-size: 1.1rem;
+			font-size: clamp(0.6rem, 4vw, 1.1rem);
 			word-break: break-word;
 
 			@media (max-width: 800px) {
@@ -191,8 +192,8 @@
 				border: 4px solid var(--red);
 
 				@media (max-width: 800px) {
-					height: 10rem;
-					width: clamp(8rem, 60vw, 18rem);
+					height: 8rem;
+					width: clamp(8rem, 60vw, 14rem);
 				}
 			}
 		}

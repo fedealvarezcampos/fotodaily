@@ -54,7 +54,8 @@
 		@media (max-width: 800px) {
 			height: fit-content;
 			width: 100vw;
-			padding: 1rem;
+			padding: 0.8rem;
+			top: 4rem;
 			flex-direction: row;
 			place-content: center;
 			border-right: unset;
@@ -88,7 +89,7 @@
 			}
 
 			span:first-child {
-				font-size: clamp(0.8rem, 3vw, 1.2rem);
+				font-size: clamp(0.9rem, 3vw, 1.2rem);
 			}
 		}
 	}
