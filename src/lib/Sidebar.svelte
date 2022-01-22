@@ -1,5 +1,8 @@
 <script>
-	import { fetchOptions, activeButton } from '../stores';
+	import { fly } from 'svelte/transition';
+	import { fetchOptions, activeButton, sidebarOut } from '../stores';
+
+	$: visible = $sidebarOut;
 
 	const filterByDate = () => {
 		if ($fetchOptions.filter !== 'date') {
@@ -16,7 +19,12 @@
 	};
 </script>
 
-<div class="sidebar">
+<div
+	class="sidebar"
+	transition:fly={{ duration: 150, x: -200 }}
+	on:introstart={visible && sidebarOut.set(!$sidebarOut)}
+	on:outroend={!visible && sidebarOut.set(!$sidebarOut)}
+>
 	<nav>
 		<ul>
 			<li>
@@ -39,18 +47,18 @@
 		top: 6rem;
 		padding-top: 3rem;
 		height: calc(100vh - 6rem);
-		width: 16rem;
-		border-right: 4px solid var(--red);
+		width: 14rem;
+		border-right: 15px double var(--black);
+		background-color: var(--red);
 
 		@media (max-width: 800px) {
 			height: fit-content;
 			width: 100vw;
-			padding: 1.2rem;
+			padding: 1rem;
 			flex-direction: row;
 			place-content: center;
 			border-right: unset;
-			border-bottom: 4px solid var(--red);
-			background-color: var(--black);
+			border-bottom: 8px double var(--black);
 			z-index: 3;
 		}
 
