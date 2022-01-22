@@ -39,7 +39,7 @@
 			</li>
 		</ul>
 	</nav>
-	<p><a href="/">{siteTitle}</a></p>
+	<a href="/"><img src="/images/logo.svg" alt="logo" /></a>
 	<span class="btnContainer">
 		{#if !$isAuthed}
 			<button on:click|preventDefault={toggleModal}>LOG IN</button>
@@ -68,25 +68,19 @@
 		z-index: 3;
 
 		@media (max-width: 800px) {
-			height: 4.8rem;
+			height: 5rem;
 			padding: 0 0.8rem;
 			gap: 0.8rem;
 			border-bottom: 4px solid var(--red);
 		}
 
-		p {
-			&:nth-child(2) {
-				position: relative;
-				font-size: clamp(1rem, 4vw, 1.4rem);
+		a {
+			display: flex;
+			place-content: center;
+		}
 
-				@media (max-width: 800px) {
-					margin-right: auto;
-				}
-			}
-
-			a {
-				color: var(--white);
-			}
+		img {
+			width: clamp(8rem, 20vw, 12rem);
 		}
 
 		ul {
@@ -94,10 +88,16 @@
 			gap: 1rem;
 			font-size: 1.1rem;
 			list-style: none;
+			margin: 0;
 
 			@media (max-width: 800px) {
 				gap: 0.5rem;
 				font-size: 0.6rem;
+			}
+
+			li {
+				display: flex;
+				place-content: center;
 			}
 		}
 

@@ -54,8 +54,8 @@
 		@media (max-width: 800px) {
 			height: fit-content;
 			width: 100vw;
-			padding: 0.8rem;
-			top: 4rem;
+			padding: 0.6rem 0.6rem 0.8rem 0.6rem;
+			top: 5rem;
 			flex-direction: row;
 			place-content: center;
 			border-right: unset;
@@ -83,7 +83,7 @@
 				width: 5.4rem;
 
 				@media (max-width: 800px) {
-					padding: 0.3rem 1rem;
+					padding: 0.3rem 0.6rem;
 					width: fit-content;
 				}
 			}

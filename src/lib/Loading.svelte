@@ -1,11 +1,22 @@
-<span>Loading...</span>
-<div class="loader" />
+<div>
+	<span>Loading...</span>
+	<div class="loader" />
+</div>
 
 <style lang="postcss">
-	span {
+	div {
+		display: flex;
+		flex-direction: column;
+		place-items: center;
+		gap: 0.4rem;
 		color: var(--white);
 		font-size: 1.2rem;
 		padding-bottom: 0.2rem;
+
+		@media (max-width: 800px) {
+			gap: 0.2rem;
+			padding-bottom: 6rem;
+		}
 	}
 
 	.loader {
@@ -27,6 +38,15 @@
 			)
 			left / calc((var(--n) + 1) * (var(--s) + var(--g))) 100% no-repeat content-box;
 		animation: load 1.5s steps(calc(var(--n) + 1)) infinite;
+
+		@media (max-width: 800px) {
+			--n: 5; /* stripe number */
+			--s: 15px; /* stripe width */
+			--g: 4px; /*  gap  */
+			--b: 3px; /* border */
+
+			height: 28px;
+		}
 	}
 
 	@keyframes load {

@@ -69,7 +69,7 @@
 
 		@media (max-width: 800px) {
 			flex-direction: column;
-			gap: 1.5rem;
+			gap: 1rem;
 		}
 	}
 
@@ -80,5 +80,9 @@
 		flex-direction: column;
 		place-content: center;
 		place-items: center;
+
+		@media (max-width: 800px) {
+			min-height: calc(100vh - 10rem);
+		}
 	}
 </style>
