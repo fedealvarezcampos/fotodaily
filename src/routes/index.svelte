@@ -1,10 +1,9 @@
 <script>
-	import NewsList from '$lib/NewsList.svelte';
-
 	import axios from 'axios';
 	import { onMount } from 'svelte';
 	import { fetchOptions, fetchNewsTrigger } from '../stores';
 	import { hostURL } from '../host';
+	import NewsList from '$lib/NewsList.svelte';
 
 	$: filter = $fetchOptions.filter;
 

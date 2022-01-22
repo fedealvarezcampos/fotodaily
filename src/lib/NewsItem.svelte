@@ -9,6 +9,7 @@
 	let {
 		//
 		isLiked,
+		isSaved,
 		likes,
 		title,
 		site,
@@ -20,6 +21,10 @@
 
 	// CSS for like hearts
 	$: heartColor = isLiked
+		? 'invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%) contrast(85%)'
+		: 'none';
+
+	$: archivedColor = isSaved
 		? 'invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%) contrast(85%)'
 		: 'none';
 
@@ -47,6 +52,8 @@
 			const res = await axios.post(`${hostURL}/api/newsitems/${newsItem.id}/save`, '', {
 				headers: { Authorization: `Bearer ${token}` }
 			});
+
+			isSaved = res?.data?.data?.attributes?.isSaved;
 		} catch (e) {
 			error = e;
 		}
@@ -74,13 +81,21 @@
 			<span>
 				<button on:click={likePost}
 					><img
+						class="heart"
 						style="--heartColor: {heartColor}"
 						src="./images/like.svg"
 						alt="like item"
 					/></button
 				>{likes}
 			</span>
-			<button on:click={savePost}><img src="./images/archive.svg" alt="save item" /></button>
+			<button on:click={savePost}
+				><img
+					class="archived"
+					style="--archivedColor: {archivedColor}"
+					src="./images/archive.svg"
+					alt="save item"
+				/></button
+			>
 		</div>
 	{/if}
 </li>
@@ -172,8 +187,8 @@
 				height: 10rem;
 				width: 12rem;
 				object-fit: cover;
-				border-radius: 4px;
-				border: 3px solid var(--red);
+				border-radius: 8px;
+				border: 4px solid var(--red);
 
 				@media (max-width: 800px) {
 					height: 10rem;
@@ -211,7 +226,6 @@
 			img {
 				width: 1.6rem;
 				border: unset;
-				filter: var(--heartColor);
 
 				&:hover {
 					filter: invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%)
@@ -224,6 +238,14 @@
 					filter: brightness(400%);
 					transform: scale(1);
 					transition: all 80ms;
+				}
+
+				&.heart {
+					filter: var(--heartColor);
+				}
+
+				&.archived {
+					filter: var(--archivedColor);
 				}
 			}
 		}

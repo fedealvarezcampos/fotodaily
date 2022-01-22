@@ -1,16 +1,25 @@
 <script>
 	import { fade } from 'svelte/transition';
+	import { afterNavigate } from '$app/navigation';
+	import { sidebarOut } from '../stores';
+
+	$: visible = $sidebarOut;
+
+	// sidebar check when navigating directly to url with no sidebar
+	afterNavigate(({ from }) => !from && sidebarOut.set(true));
 </script>
 
-<div in:fade={{ duration: 150 }}>
-	<p>
-		<span> Just a photography related news aggregator.</span>
-		<span>We fetch photo news every 24 hours from popular 📷 sites.</span>
-		<span>Log in to like and save articles!</span>
-		<span>Made with Svelte and Strapi CMS.</span>
-	</p>
-	<a href="/">Back to main</a>
-</div>
+{#if visible}
+	<div in:fade={{ duration: 150 }}>
+		<p>
+			<span> Just a photography related news aggregator.</span>
+			<span>We fetch photo news every day from popular 📷 sites.</span>
+			<span>Log in to like and save articles!</span>
+			<span>Made with Svelte and Strapi CMS.</span>
+		</p>
+		<a href="/">Back to main</a>
+	</div>
+{/if}
 
 <style lang="postcss">
 	div {

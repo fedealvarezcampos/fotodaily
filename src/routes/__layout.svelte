@@ -4,14 +4,21 @@
 	import { onMount } from 'svelte';
 	import { hostURL } from '../host';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	import { isAuthed } from '../stores';
 	import Nav from '$lib/Nav.svelte';
 	import Sidebar from '$lib/Sidebar.svelte';
 
 	let isMounted;
+	let logged;
+
+	let token;
 
 	onMount(() => {
 		isMounted = true;
+		if (localStorage.user) {
+			token = JSON.parse(localStorage.user).jwt;
+		}
 	});
 
 	$: currentPath = $page.url.pathname;
@@ -39,6 +46,9 @@
 	};
 
 	$: isMounted && checkIfLogged();
+
+	const redirect = () => currentPath === '/bookmarks' && goto('/');
+	$: isMounted && !token && !$isAuthed && redirect();
 </script>
 
 <Nav />
@@ -65,6 +75,7 @@
 
 	main {
 		width: 100%;
+		min-height: calc(100vh - 6rem);
 		display: flex;
 		flex-direction: column;
 		place-content: center;

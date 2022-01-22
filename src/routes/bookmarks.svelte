@@ -1,15 +1,19 @@
 <script>
 	import axios from 'axios';
 	import { onMount } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
 	import { hostURL } from '../host';
 	import NewsList from '$lib/NewsList.svelte';
-
-	let isMounted;
+	import { sidebarOut } from '../stores';
 
 	let loading;
-	let newsItems = [];
 
+	$: noSidebar = $sidebarOut;
+
+	let isMounted;
 	onMount(() => (isMounted = true));
+
+	let newsItems = [];
 
 	const fetchNews = async () => {
 		try {
@@ -30,6 +34,25 @@
 	};
 
 	$: isMounted && fetchNews();
+
+	// sidebar check when navigating directly to url with no sidebar
+	afterNavigate(({ from }) => !from && sidebarOut.set(true));
 </script>
 
-<NewsList {newsItems} {loading} />
+{#if noSidebar}
+	<div>
+		<NewsList {newsItems} {loading} />
+	</div>
+{/if}
+
+<style lang="postcss">
+	div {
+		display: flex;
+		flex-direction: column;
+		place-items: center;
+
+		@media (max-width: 800px) {
+			padding: 1.5rem 0;
+		}
+	}
+</style>
