@@ -1,20 +1,14 @@
 <script>
-	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { isAuthed, fetchNewsTrigger } from '../stores';
+	import { isAuthed, fetchNewsTrigger, resetTrigger } from '../stores';
 
 	import Modal from '$lib/Modal.svelte';
 	import AuthForm from '$lib/AuthForm.svelte';
 
-	let siteTitle = '📷 FOTODAILY';
-
 	$: currentPath = $page.url.pathname;
 
 	let showModal = false;
-	let isMounted;
-
-	onMount(() => (isMounted = true));
 
 	const toggleModal = () => {
 		showModal = !showModal;
@@ -23,6 +17,7 @@
 	const logOut = () => {
 		localStorage.clear('user');
 		isAuthed.set(false);
+		resetTrigger.set('logout');
 		fetchNewsTrigger.set('logout');
 		currentPath !== '/' && goto('/');
 	};

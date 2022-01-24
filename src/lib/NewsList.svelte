@@ -19,7 +19,7 @@
 <style lang="postcss">
 	.newsList {
 		padding: 0;
-		margin: 3rem 0 3rem 0;
+		margin: 2rem 0 3rem 0;
 		display: flex;
 		place-content: center;
 		flex-wrap: wrap;

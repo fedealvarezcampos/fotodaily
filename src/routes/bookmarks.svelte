@@ -15,7 +15,7 @@
 
 	let newsItems = [];
 
-	const fetchNews = async () => {
+	const fetchSavedNews = async () => {
 		try {
 			loading = true;
 
@@ -33,9 +33,9 @@
 		}
 	};
 
-	$: isMounted && fetchNews();
+	$: isMounted && fetchSavedNews();
 
-	// sidebar check when navigating directly to url with no sidebar
+	// when navigating directly to page with no sidebar, check
 	afterNavigate(({ from }) => !from && sidebarOut.set(true));
 </script>
 

@@ -5,7 +5,7 @@
 
 	$: visible = $sidebarOut;
 
-	// sidebar check when navigating directly to url with no sidebar
+	// when navigating directly to page with no sidebar, check
 	afterNavigate(({ from }) => !from && sidebarOut.set(true));
 </script>
 

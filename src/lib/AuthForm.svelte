@@ -1,9 +1,11 @@
 <script>
 	import axios from 'axios';
 	import { hostURL } from '../host';
-	import { isAuthed, fetchNewsTrigger } from '../stores';
+	import { isAuthed, fetchNewsTrigger, resetTrigger } from '../stores';
 
 	export let toggleModal;
+
+	let loading;
 
 	let email;
 	let password;
@@ -19,6 +21,8 @@
 				err = "Passwords don't match!";
 				return;
 			}
+
+			loading = true;
 
 			const { data, error } = await axios.post(`${hostURL}/api/auth/local/register`, {
 				email: email,
@@ -41,6 +45,8 @@
 			toggleModal();
 		} catch (error) {
 			err = error.response.data.error.message;
+		} finally {
+			loading = false;
 		}
 	};
 
@@ -64,6 +70,7 @@
 				confirmed: data?.user?.confirmed
 			});
 
+			resetTrigger.set('login');
 			fetchNewsTrigger.set('login');
 			toggleModal();
 		} catch (error) {
@@ -89,13 +96,17 @@
 				<input bind:value={confirmPassword} type="password" name="confirmPass" id="confirmPass" />
 			</label>
 		{:else}
-			<span class="toRegistrationLink" on:click={() => (registrationForm = true)}
-				>...or register first</span
-			>
+			<span class="toRegistrationLink" on:click={() => (registrationForm = true)}>
+				...or register first
+			</span>
 		{/if}
 	</div>
+
 	{err}
-	<button>{registrationForm ? 'SIGN UP' : 'LOG IN'}</button>
+	<span class="buttonContainer">
+		<button>{registrationForm ? 'SIGN UP' : 'LOG IN'}</button>
+		{loading ? 'Logging in...' : ''}
+	</span>
 </form>
 
 <style lang="postcss">
@@ -109,9 +120,13 @@
 			font-size: 1.3rem;
 			font-weight: 700;
 		}
-
-		button {
+		.buttonContainer {
 			margin-top: 0.5rem;
+			display: flex;
+			place-items: center;
+			font-size: 1.1rem;
+			font-style: italic;
+			gap: 0.8rem;
 		}
 
 		.inputs {

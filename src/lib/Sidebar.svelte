@@ -1,20 +1,22 @@
 <script>
 	import { fly } from 'svelte/transition';
-	import { fetchOptions, activeButton, sidebarOut } from '../stores';
+	import { fetchOptions, resetTrigger, activeButton, sidebarOut } from '../stores';
 
 	$: visible = $sidebarOut;
 
 	const filterByDate = () => {
 		if ($fetchOptions.filter !== 'date') {
 			activeButton.set('new');
-			fetchOptions.set({ order: 'DESC', filter: 'date' });
+			resetTrigger.set('date');
+			fetchOptions.set({ order: 'DESC', filter: 'date', page: 1 });
 		}
 	};
 
 	const filterByLikes = () => {
 		if ($fetchOptions.filter !== 'likes') {
 			activeButton.set('popular');
-			fetchOptions.set({ order: 'DESC', filter: 'likes' });
+			resetTrigger.set('likes');
+			fetchOptions.set({ order: 'DESC', filter: 'likes', page: 1 });
 		}
 	};
 </script>
@@ -30,9 +32,9 @@
 			<li>
 				<span>SORTING BY</span>
 				<button class={$activeButton === 'new' && 'active'} on:click={filterByDate}>NEW</button>
-				<button class={$activeButton === 'popular' && 'active'} on:click={filterByLikes}
-					>POPULAR</button
-				>
+				<button class={$activeButton === 'popular' && 'active'} on:click={filterByLikes}>
+					POPULAR
+				</button>
 			</li>
 		</ul>
 	</nav>
