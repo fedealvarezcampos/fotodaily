@@ -1,43 +1,19 @@
 <script>
-	import { fly } from 'svelte/transition';
-	import { fetchOptions, resetTrigger, activeButton, sidebarOut } from '../stores';
+	import { fly, fade } from 'svelte/transition';
+	import { sidebarOut } from '../stores';
+	import Sorter from './Sorter.svelte';
 
 	$: visible = $sidebarOut;
-
-	const filterByDate = () => {
-		if ($fetchOptions.filter !== 'date') {
-			activeButton.set('new');
-			resetTrigger.set('date');
-			fetchOptions.set({ order: 'DESC', filter: 'date', page: 1 });
-		}
-	};
-
-	const filterByLikes = () => {
-		if ($fetchOptions.filter !== 'likes') {
-			activeButton.set('popular');
-			resetTrigger.set('likes');
-			fetchOptions.set({ order: 'DESC', filter: 'likes', page: 1 });
-		}
-	};
 </script>
 
 <div
 	class="sidebar"
-	transition:fly={{ duration: 150, x: -200 }}
+	transition:fly={{ duration: 200, x: -200 }}
 	on:introstart={visible && sidebarOut.set(!$sidebarOut)}
 	on:outroend={!visible && sidebarOut.set(!$sidebarOut)}
 >
-	<nav>
-		<ul>
-			<li>
-				<span>SORTING BY</span>
-				<button class={$activeButton === 'new' && 'active'} on:click={filterByDate}>NEW</button>
-				<button class={$activeButton === 'popular' && 'active'} on:click={filterByLikes}>
-					POPULAR
-				</button>
-			</li>
-		</ul>
-	</nav>
+	<p transition:fly={{ duration: 200, y: -60 }}>New photography news every day!</p>
+	<Sorter />
 </div>
 
 <style lang="postcss">
@@ -46,57 +22,44 @@
 		display: flex;
 		flex-direction: column;
 		place-items: center;
+		gap: 2rem;
 		top: 6rem;
-		padding-top: 3rem;
+		padding: 3rem 1rem;
 		height: calc(100vh - 6rem);
 		width: 14rem;
 		border-right: 15px double var(--black);
 		background-color: var(--red);
 
 		@media (max-width: 800px) {
+			gap: 0.8rem;
 			height: fit-content;
 			width: 100vw;
-			padding: 0.6rem 0.6rem 0.8rem 0.6rem;
+			padding: 0.6rem 0.6rem 0.8rem 0.4rem;
 			top: 5rem;
 			flex-direction: row;
-			place-content: center;
+			place-content: space-between;
 			border-right: unset;
 			border-bottom: 8px double var(--black);
 			z-index: 3;
 		}
 
-		ul {
-			margin: 0;
-			padding: 0;
-			list-style: none;
-		}
-
-		li {
-			display: flex;
-			flex-direction: column;
-			place-items: center;
-			gap: 0.8rem;
+		p {
+			padding: 1.1rem 1.3rem 1.15rem 1.1rem;
+			font-size: 1.1rem;
+			font-weight: 700;
+			border-radius: 0 14px 0 0;
+			border-left: 12px double var(--red);
+			border-bottom: 12px double var(--red);
+			background-color: var(--black);
 
 			@media (max-width: 800px) {
-				flex-direction: row;
-			}
-
-			button {
-				width: 5.4rem;
-
-				@media (max-width: 800px) {
-					padding: 0.3rem 0.6rem;
-					width: fit-content;
-				}
-			}
-
-			span:first-child {
-				font-size: clamp(0.9rem, 3vw, 1.2rem);
+				width: clamp(7rem, 34vw, 12rem);
+				padding: 0.5rem;
+				font-size: 0.6rem;
+				border-radius: 0 10px 0 0;
+				border-left: 10px double var(--red);
+				border-bottom: unset;
 			}
 		}
-	}
-
-	.active {
-		background-color: var(--pink);
 	}
 </style>
