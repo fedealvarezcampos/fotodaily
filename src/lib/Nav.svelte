@@ -75,7 +75,7 @@
 		}
 
 		img {
-			width: clamp(8rem, 20vw, 12rem);
+			width: clamp(7rem, 34vw, 12rem);
 		}
 
 		ul {

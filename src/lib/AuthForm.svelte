@@ -52,6 +52,8 @@
 
 	const handleLogin = async () => {
 		try {
+			loading = true;
+
 			const { data, error } = await axios.post(`${hostURL}/api/auth/local`, {
 				identifier: email,
 				password: password
@@ -75,6 +77,8 @@
 			toggleModal();
 		} catch (error) {
 			err = error.response.data.error.message;
+		} finally {
+			loading = false;
 		}
 	};
 </script>

@@ -71,9 +71,11 @@
 			<div>
 				<img src={image} alt="" />
 			</div>
-			<div>
-				<p>{preview.slice(0, 150) + '...'}</p>
-			</div>
+			{#if !preview.includes('$(')}
+				<div>
+					<p>{preview.slice(0, 150) + '...'}</p>
+				</div>
+			{/if}
 		</div>
 	</a>
 	{#if !loading}
@@ -125,7 +127,7 @@
 			display: flex;
 			flex-direction: column;
 			place-content: center;
-			gap: 1.6rem;
+			gap: 1.2rem;
 			color: var(--white);
 
 			@media (max-width: 800px) {
@@ -152,9 +154,13 @@
 
 			span {
 				&:first-child {
-					font-size: clamp(1.1rem, 4vw, 1.3rem);
+					font-size: clamp(1rem, 4vw, 1.3rem);
 					font-weight: 700;
 					padding-bottom: 0.2rem;
+
+					@media (max-width: 800px) {
+						padding-bottom: unset;
+					}
 				}
 
 				&:nth-child(2) {
@@ -165,7 +171,7 @@
 				&:last-child {
 					padding-left: 0.1rem;
 					font-style: italic;
-					font-size: 0.8rem;
+					font-size: clamp(0.6rem, 3vw, 0.8rem);
 				}
 			}
 		}
@@ -173,9 +179,18 @@
 		.infoContainer {
 			display: flex;
 			place-items: center;
+			place-content: center;
 			gap: 1.5rem;
 			font-size: clamp(0.6rem, 4vw, 1.1rem);
 			word-break: break-word;
+
+			p {
+				width: 12rem;
+
+				@media (max-width: 800px) {
+					width: unset;
+				}
+			}
 
 			@media (max-width: 800px) {
 				gap: 0.8rem;
@@ -185,8 +200,8 @@
 			}
 
 			img {
-				height: 10rem;
-				width: 12rem;
+				height: 10.5rem;
+				width: 100%;
 				object-fit: cover;
 				border-radius: 8px;
 				border: 4px solid var(--red);
