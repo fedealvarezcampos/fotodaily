@@ -1203,11 +1203,6 @@ svelte-hmr@^0.14.9:
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.9.tgz#35f277efc789e1a6230185717347cddb2f8e9833"
   integrity sha512-bKE9+4qb4sAnA+TKHiYurUl970rjA0XmlP9TEP7K/ncyWz3m81kA4HOgmlZK/7irGK7gzZlaPDI3cmf8fp/+tg==
 
-svelte-infinite-scroll@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/svelte-infinite-scroll/-/svelte-infinite-scroll-2.0.0.tgz#58078611f6b40eb40a89ee142559fc2fcc1e430e"
-  integrity sha512-y7cp2mJ7U26dcO5ly08rxFzpibUTbtixn1hxY4tawxKrljUkNFtPU0GCc618YszBc2Iv5o/rCk/nXHPuMckJJw==
-
 svelte-preprocess@4.10.2:
   version "4.10.2"
   resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.10.2.tgz#2405689e57161916947b8360679051a56eddd5c6"
