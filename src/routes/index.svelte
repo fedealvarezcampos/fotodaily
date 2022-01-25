@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import { hostURL } from '../host';
 	import NewsList from '$lib/NewsList.svelte';
-	import InfiniteScroll from 'svelte-infinite-scroll';
+	import { elementObserver } from '../helpers/observer';
 	import { fetchOptions, fetchNewsTrigger, resetTrigger } from '../stores';
 
 	$: filter = $fetchOptions.filter;
@@ -14,9 +14,10 @@
 	let error = null;
 
 	let page = $fetchOptions.page;
-	let pageSize = 12;
-	let newsItems = [];
 
+	let pageSize = 12;
+
+	let newsItems = [];
 	let newlyFetchedItems = [];
 
 	onMount(() => (isMounted = true));
@@ -53,10 +54,20 @@
 		}
 	};
 
-	const fetchMore = () => {
-		page++;
-		fetchNews();
+	const fetchMoreNews = () => {
+		if (newlyFetchedItems.length >= pageSize) {
+			page++;
+			fetchNews();
+		}
 	};
+
+	let elementRef = null;
+
+	$: {
+		if (elementRef) {
+			elementObserver({ fetch: fetchMoreNews, element: elementRef });
+		}
+	}
 
 	const resetItems = () => {
 		newsItems = [];
@@ -69,9 +80,14 @@
 </script>
 
 <NewsList {newsItems} {loading} />
-<InfiniteScroll
-	window={true}
-	threshold={100}
-	on:loadMore={fetchMore}
-	hasMore={newlyFetchedItems.length}
-/>
+{#if loading === false && newlyFetchedItems.length >= pageSize}
+	<span class="observer" bind:this={elementRef}>Loading more...</span>
+{/if}
+
+<style lang="postcss">
+	.observer {
+		font-size: 1.1rem;
+		font-style: italic;
+		margin-bottom: 3rem;
+	}
+</style>
