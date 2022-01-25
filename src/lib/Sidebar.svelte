@@ -12,7 +12,7 @@
 	on:introstart={visible && sidebarOut.set(!$sidebarOut)}
 	on:outroend={!visible && sidebarOut.set(!$sidebarOut)}
 >
-	<p transition:fly={{ duration: 200, y: -60 }}>New photography news every day!</p>
+	<p transition:fly={{ duration: 200, y: -60 }}>Fresh photography news every day!</p>
 	<Sorter />
 </div>
 
@@ -24,7 +24,7 @@
 		place-items: center;
 		gap: 2rem;
 		top: 6rem;
-		padding: 3rem 1rem;
+		padding: 3rem 1.2rem 3rem 1rem;
 		height: calc(100vh - 6rem);
 		width: 14rem;
 		border-right: 15px double var(--black);
