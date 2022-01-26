@@ -31,7 +31,7 @@
 		height: 100vh;
 		backdrop-filter: blur(4px);
 		background-color: rgba(0, 0, 0, 0.39);
-		z-index: 3;
+		z-index: 4;
 	}
 
 	.modal {
@@ -47,6 +47,6 @@
 		border: 6px solid var(--pink);
 		border-radius: 8px;
 		background-color: var(--red);
-		z-index: 4;
+		z-index: 5;
 	}
 </style>

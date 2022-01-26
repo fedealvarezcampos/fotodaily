@@ -32,16 +32,19 @@
 		font-size: clamp(1.1rem, 4vw, 1.3rem);
 
 		@media (max-width: 800px) {
-			padding: 2.2rem;
-			height: calc(100vh - 6rem);
+			height: 100%;
+			margin-top: 10vh;
+			padding: 2.4rem;
 		}
 
 		p {
 			display: flex;
 			flex-direction: column;
+
 			gap: 1.2rem;
 
 			span:last-child {
+				justify-self: center;
 				padding-top: 1.8rem;
 				font-style: italic;
 			}

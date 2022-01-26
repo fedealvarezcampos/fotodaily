@@ -60,18 +60,19 @@
 		border-bottom: 6px solid var(--red);
 		background-color: var(--black);
 		font-weight: 700;
-		z-index: 3;
+		z-index: 2;
 
 		@media (max-width: 800px) {
 			height: 5rem;
 			padding: 0 0.8rem;
-			gap: 0.8rem;
+			gap: 1rem;
 			border-bottom: 4px solid var(--red);
 		}
 
 		a {
 			display: flex;
 			place-content: center;
+			justify-self: flex-start;
 		}
 
 		img {
@@ -111,7 +112,7 @@
 			gap: 1rem;
 
 			@media (max-width: 800px) {
-				width: fit-content;
+				width: 6.6rem;
 				gap: 0.6rem;
 			}
 		}

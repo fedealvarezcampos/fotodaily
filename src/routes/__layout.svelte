@@ -68,21 +68,21 @@
 		display: flex;
 
 		@media (max-width: 800px) {
-			flex-direction: column;
 			gap: 1.2rem;
+			flex-direction: column;
 		}
 	}
 
 	main {
 		width: 100%;
-		min-height: calc(100vh - 6rem);
 		display: flex;
 		flex-direction: column;
 		place-content: center;
 		place-items: center;
 
 		@media (max-width: 800px) {
-			min-height: calc(100vh - 10rem);
+			height: 100%;
+			place-content: flex-start;
 		}
 	}
 </style>
