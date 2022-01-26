@@ -33,6 +33,7 @@
 
 		@media (max-width: 800px) {
 			padding: 2.2rem;
+			height: calc(100vh - 6rem);
 		}
 
 		p {

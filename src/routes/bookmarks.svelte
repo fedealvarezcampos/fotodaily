@@ -52,7 +52,7 @@
 		place-items: center;
 
 		@media (max-width: 800px) {
-			padding: 1.5rem 0;
+			padding-top: 1.5rem;
 		}
 	}
 </style>

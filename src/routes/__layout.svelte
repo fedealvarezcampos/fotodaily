@@ -69,7 +69,7 @@
 
 		@media (max-width: 800px) {
 			flex-direction: column;
-			gap: 1rem;
+			gap: 1.2rem;
 		}
 	}
 

@@ -53,7 +53,7 @@
 		position: sticky;
 		top: 0;
 		display: flex;
-		padding: 0 4rem;
+		padding: 0 clamp(2.2rem, 2.6vw, 4rem);
 		height: 6rem;
 		place-items: center;
 		justify-content: space-between;

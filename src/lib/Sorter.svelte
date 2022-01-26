@@ -22,10 +22,8 @@
 	<ul>
 		<li>
 			<span>SORTING BY</span>
-			<button class={$activeButton === 'new' && 'active'} on:click={filterByDate}>NEW</button>
-			<button class={$activeButton === 'popular' && 'active'} on:click={filterByLikes}>
-				POPULAR
-			</button>
+			<button class:active={$activeButton === 'new'} on:click={filterByDate}>NEW</button>
+			<button class:active={$activeButton === 'popular'} on:click={filterByLikes}> POPULAR </button>
 		</li>
 	</ul>
 </nav>

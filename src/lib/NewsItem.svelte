@@ -19,15 +19,6 @@
 		preview
 	} = newsItem?.attributes;
 
-	// CSS for like hearts
-	$: heartColor = isLiked
-		? 'invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%) contrast(85%)'
-		: 'none';
-
-	$: archivedColor = isSaved
-		? 'invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%) contrast(85%)'
-		: 'none';
-
 	let error;
 
 	const likePost = async () => {
@@ -58,6 +49,8 @@
 			error = e;
 		}
 	};
+
+	const code = '$(' || '</';
 </script>
 
 <li class="newsItem">
@@ -71,7 +64,7 @@
 			<div>
 				<img src={image} alt="" />
 			</div>
-			{#if !preview.includes('$(')}
+			{#if !preview.includes(code)}
 				<div>
 					<p>{preview.slice(0, 150) + '...'}</p>
 				</div>
@@ -82,21 +75,11 @@
 		<div class="buttons">
 			<span>
 				<button on:click={likePost}
-					><img
-						class="heart"
-						style="--heartColor: {heartColor}"
-						src="./images/like.svg"
-						alt="like item"
-					/></button
+					><img class:heart={isLiked} src="./images/like.svg" alt="like item" /></button
 				>{likes}
 			</span>
 			<button on:click={savePost}
-				><img
-					class="archived"
-					style="--archivedColor: {archivedColor}"
-					src="./images/archive.svg"
-					alt="save item"
-				/></button
+				><img class:archived={isSaved} src="./images/archive.svg" alt="save item" /></button
 			>
 		</div>
 	{/if}
@@ -257,11 +240,13 @@
 				}
 
 				&.heart {
-					filter: var(--heartColor);
+					filter: invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%)
+						contrast(85%);
 				}
 
 				&.archived {
-					filter: var(--archivedColor);
+					filter: invert(58%) sepia(37%) saturate(414%) hue-rotate(318deg) brightness(88%)
+						contrast(85%);
 				}
 			}
 		}
