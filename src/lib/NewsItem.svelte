@@ -49,8 +49,6 @@
 			error = e;
 		}
 	};
-
-	const code = '$(' || '</';
 </script>
 
 <li class="newsItem">
@@ -64,7 +62,8 @@
 			<div>
 				<img src={image} alt="" />
 			</div>
-			{#if !preview.includes(code)}
+			<!-- no code allowed -->
+			{#if !preview.includes('$(') && !preview.includes('</')}
 				<div>
 					<p>{preview.slice(0, 150) + '...'}</p>
 				</div>
@@ -185,6 +184,7 @@
 			img {
 				height: 10.5rem;
 				width: 100%;
+				max-width: 16rem;
 				object-fit: cover;
 				border-radius: 8px;
 				border: 4px solid var(--red);
