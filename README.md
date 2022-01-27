@@ -16,9 +16,9 @@ yarn
 npm install
 ```
 
-[You'll also need the backend side of things.](https://github.com/fedealvarezcampos/photodailyback)
+[You'll also need the backend side of things.](https://github.com/fedealvarezcampos/fotodailyback)
 
-_Set host url on .env accordingly._
+_Set `VITE_HOSTURL` on .env accordingly._
 
 ## Developing
 
