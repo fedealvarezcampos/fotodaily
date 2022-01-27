@@ -39,6 +39,10 @@
 	afterNavigate(({ from }) => !from && sidebarOut.set(true));
 </script>
 
+<svelte:head>
+	<title>Fotodaily | My saved articles</title>
+</svelte:head>
+
 {#if noSidebar}
 	<div>
 		<NewsList {newsItems} {loading} />

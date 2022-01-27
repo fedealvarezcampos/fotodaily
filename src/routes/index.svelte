@@ -79,6 +79,10 @@
 	$: $fetchNewsTrigger && fetchNews();
 </script>
 
+<svelte:head>
+	<title>Fotodaily | All your photography news!</title>
+</svelte:head>
+
 <NewsList {newsItems} {loading} />
 {#if loading === false && newlyFetchedItems.length >= pageSize}
 	<span class="observer" bind:this={elementRef}>Loading more...</span>

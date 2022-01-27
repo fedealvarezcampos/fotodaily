@@ -15,7 +15,7 @@
 
 		@media (max-width: 800px) {
 			gap: 0.2rem;
-			padding-bottom: 6rem;
+			padding-top: 5rem;
 		}
 	}
 

@@ -101,7 +101,9 @@
 			width: 4rem;
 
 			@media (max-width: 800px) {
-				width: 3rem;
+				width: fit-content;
+				font-size: 0.5rem;
+				padding: 0.3rem 0.25rem;
 			}
 		}
 
@@ -112,7 +114,7 @@
 			gap: 1rem;
 
 			@media (max-width: 800px) {
-				width: 6.6rem;
+				width: 4.8rem;
 				gap: 0.6rem;
 			}
 		}

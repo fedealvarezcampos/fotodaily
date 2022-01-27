@@ -3,11 +3,17 @@
 	import { afterNavigate } from '$app/navigation';
 	import { sidebarOut } from '../stores';
 
+	export const prerender = true;
+
 	$: visible = $sidebarOut;
 
 	// when navigating directly to page with no sidebar, check
 	afterNavigate(({ from }) => !from && sidebarOut.set(true));
 </script>
+
+<svelte:head>
+	<title>Fotodaily | About</title>
+</svelte:head>
 
 {#if visible}
 	<div in:fade={{ duration: 150 }}>
