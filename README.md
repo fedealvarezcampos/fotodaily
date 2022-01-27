@@ -1,36 +1,45 @@
 # Fotodaily
 
-## Creating a project
+Photography related news aggregator that automatically fetches content from relevant sites every day.
 
-If you're seeing this, you've probably already done this step. Congrats!
+### **_[Check it out! @vercel](https://fotodaily.vercel.app/)_**
+
+<br>
+
+## Installing locally
+
+Just install all deps:
 
 ```bash
-# create a new project in the current directory
-npm init svelte@next
+# with yarn
+yarn
 
-# create a new project in my-app
-npm init svelte@next my-app
+# or npm
+npm install
 ```
 
-> Note: the `@next` is temporary
+[You'll also need the backend side of things.](https://github.com/fedealvarezcampos/photodailyback)
+
+_Set host url on .env accordingly._
+
+<br>
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once installed you can run in dev:
 
 ```bash
+# with yarn
+yarn dev
+
+# or npm
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+<br>
 
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
+## Made with
 
-```bash
-npm run build
-```
-
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+![Svelte](https://img.shields.io/badge/svelte-%23f1413d.svg?style=for-the-badge&logo=svelte&logoColor=white)  
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)  
+![Strapi](https://img.shields.io/badge/strapi-%232E7EEA.svg?style=for-the-badge&logo=strapi&logoColor=white)
