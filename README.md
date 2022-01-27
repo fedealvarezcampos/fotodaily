@@ -4,8 +4,6 @@ Photography related news aggregator that automatically fetches content from rele
 
 ### **_[Check it out! @vercel](https://fotodaily.vercel.app/)_**
 
-<br>
-
 ## Installing locally
 
 Just install all deps:
@@ -22,8 +20,6 @@ npm install
 
 _Set host url on .env accordingly._
 
-<br>
-
 ## Developing
 
 Once installed you can run in dev:
@@ -35,8 +31,6 @@ yarn dev
 # or npm
 npm run dev
 ```
-
-<br>
 
 ## Made with
 
