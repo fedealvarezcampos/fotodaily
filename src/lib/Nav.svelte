@@ -103,7 +103,7 @@
 			@media (max-width: 800px) {
 				width: fit-content;
 				font-size: 0.5rem;
-				padding: 0.3rem 0.25rem;
+				padding: 0.3rem 0.33rem;
 			}
 		}
 

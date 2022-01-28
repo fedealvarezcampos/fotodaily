@@ -48,5 +48,9 @@
 		border-radius: 8px;
 		background-color: var(--red);
 		z-index: 5;
+
+		@media (max-width: 800px) {
+			padding: 2rem 1.8rem;
+		}
 	}
 </style>

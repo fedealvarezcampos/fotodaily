@@ -138,6 +138,10 @@
 			flex-direction: column;
 			gap: 1rem;
 
+			@media (max-width: 800px) {
+				width: clamp(10rem, 60vw, 16rem);
+			}
+
 			> label {
 				display: flex;
 				flex-direction: column;
