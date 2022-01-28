@@ -1,15 +1,5 @@
 import preprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-auto';
-import path from 'path';
-
-export const sveltekitViteConfig = {
-	resolve: {
-		alias: {
-			$lib: path.resolve('./src/lib'),
-			$app: path.resolve('./.svelte-kit/runtime/app')
-		}
-	}
-};
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,7 +7,13 @@ const config = {
 		adapter: adapter(),
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
-		vite: sveltekitViteConfig
+
+		vite: {
+			test: {
+				global: true,
+				environment: 'jsdom'
+			}
+		}
 	},
 
 	preprocess: [
@@ -28,3 +24,13 @@ const config = {
 };
 
 export default config;
+
+// import path from 'path';
+
+// export const sveltekitViteConfig = {
+// 	resolve: {
+// 		alias: {
+// 			$lib: path.resolve('./src/lib')
+// 		}
+// 	}
+// };
