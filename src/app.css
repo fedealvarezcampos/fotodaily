@@ -8,6 +8,14 @@
 	--blue: #163d55;
 	--white: #fffcf2;
 	--black: #252422;
+
+	/* toast styles */
+	--toastContainerTop: auto;
+	--toastContainerBottom: 1rem;
+	--toastBackground: var(--red);
+	--toastColor: var(--white);
+	--toastBorderRadius: 6px;
+	--toastBarBackground: var(--blue);
 }
 
 #svelte {

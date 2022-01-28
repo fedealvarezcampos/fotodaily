@@ -8,6 +8,7 @@
 	import { isAuthed } from '../stores';
 	import Nav from '$lib/Nav.svelte';
 	import Sidebar from '$lib/Sidebar.svelte';
+	import { SvelteToast } from '@zerodevx/svelte-toast';
 
 	let isMounted;
 	let logged;
@@ -63,6 +64,10 @@
 	</main>
 </div>
 
+<span class="toast">
+	<SvelteToast />
+</span>
+
 <style lang="postcss">
 	.bodyContainer {
 		display: flex;
@@ -84,5 +89,10 @@
 			height: 100%;
 			place-content: flex-start;
 		}
+	}
+
+	.toast {
+		font-family: 'Ubuntu', sans-serif;
+		font-weight: 700;
 	}
 </style>

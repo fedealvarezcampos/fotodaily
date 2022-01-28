@@ -1,6 +1,7 @@
 <script>
 	import axios from 'axios';
 	import { hostURL } from '../host';
+	import { toast } from '@zerodevx/svelte-toast';
 
 	export let newsItem;
 
@@ -49,6 +50,11 @@
 			error = e;
 		}
 	};
+
+	const copyLink = async () => {
+		navigator.clipboard.writeText(link);
+		toast.push('Link copied!');
+	};
 </script>
 
 <li class="newsItem">
@@ -80,6 +86,7 @@
 			<button on:click={savePost}
 				><img class:archived={isSaved} src="./images/archive.svg" alt="save item" /></button
 			>
+			<button on:click={copyLink}><img src="./images/link.svg" alt="save item" /></button>
 		</div>
 	{/if}
 </li>
@@ -204,7 +211,7 @@
 			width: 100%;
 			display: flex;
 			justify-content: center;
-			gap: 1.4rem;
+			gap: 1rem;
 			border-top: 1px solid var(--red);
 
 			span {

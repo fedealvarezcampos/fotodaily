@@ -17,6 +17,7 @@
 		"@sveltejs/kit": "next",
 		"@sveltejs/vite-plugin-svelte": "^1.0.0-next.36",
 		"@testing-library/svelte": "^3.0.3",
+		"@zerodevx/svelte-toast": "^0.6.3",
 		"autoprefixer": "10.4.2",
 		"c8": "^7.11.0",
 		"eslint": "^7.32.0",
