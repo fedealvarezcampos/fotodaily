@@ -1,6 +1,7 @@
 <script>
 	import axios from 'axios';
 	import { hostURL } from '../host';
+	import { isAuthed } from '../stores';
 	import { toast } from '@zerodevx/svelte-toast';
 
 	export let newsItem;
@@ -24,7 +25,14 @@
 
 	const likePost = async () => {
 		try {
+			if (!$isAuthed) {
+				toast.push('Log in to like it!');
+				return;
+			}
+
 			const token = JSON.parse(localStorage.getItem('user'))?.jwt;
+
+			console.log('verga');
 
 			const res = await axios.post(`${hostURL}/api/newsitems/${newsItem.id}/likes`, '', {
 				headers: { Authorization: `Bearer ${token}` }
@@ -32,13 +40,18 @@
 
 			isLiked = res?.data?.data?.attributes?.isLiked;
 			likes = res?.data?.data?.attributes?.likes;
-		} catch (e) {
-			error = e;
+		} catch (err) {
+			error = err;
 		}
 	};
 
 	const savePost = async () => {
 		try {
+			if (!$isAuthed) {
+				toast.push('Log in to save articles!');
+				return;
+			}
+
 			const token = JSON.parse(localStorage.getItem('user'))?.jwt;
 
 			const res = await axios.post(`${hostURL}/api/newsitems/${newsItem.id}/save`, '', {
@@ -46,8 +59,8 @@
 			});
 
 			isSaved = res?.data?.data?.attributes?.isSaved;
-		} catch (e) {
-			error = e;
+		} catch (err) {
+			error = err;
 		}
 	};
 

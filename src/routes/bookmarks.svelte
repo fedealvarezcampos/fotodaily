@@ -7,6 +7,7 @@
 	import { sidebarOut } from '../stores';
 
 	let loading;
+	let error;
 
 	$: noSidebar = $sidebarOut;
 
@@ -26,8 +27,8 @@
 			});
 
 			newsItems = res?.data.data;
-		} catch (e) {
-			error = e;
+		} catch (err) {
+			error = err;
 		} finally {
 			loading = false;
 		}

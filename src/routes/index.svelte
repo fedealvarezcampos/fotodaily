@@ -11,7 +11,7 @@
 	let isMounted;
 
 	let loading;
-	let error = null;
+	let error;
 
 	let page = $fetchOptions.page;
 
@@ -47,8 +47,8 @@
 
 			newlyFetchedItems = res.data.data;
 			newsItems = [...newsItems, ...newlyFetchedItems];
-		} catch (e) {
-			error = e;
+		} catch (err) {
+			error = err;
 		} finally {
 			loading = false;
 		}

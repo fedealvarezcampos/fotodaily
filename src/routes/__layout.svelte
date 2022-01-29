@@ -11,7 +11,6 @@
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 
 	let isMounted;
-	let logged;
 
 	let token;
 

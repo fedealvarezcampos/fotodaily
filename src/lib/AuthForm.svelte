@@ -1,4 +1,6 @@
 <script>
+	import { toast } from '@zerodevx/svelte-toast';
+
 	import axios from 'axios';
 	import { hostURL } from '../host';
 	import { isAuthed, fetchNewsTrigger, resetTrigger } from '../stores';
@@ -11,14 +13,12 @@
 	let password;
 	let confirmPassword;
 
-	let err = '';
-
 	let registrationForm = false;
 
 	const handleRegistration = async () => {
 		try {
 			if (password !== confirmPassword) {
-				err = "Passwords don't match!";
+				toast.push("Passwords don't match!");
 				return;
 			}
 
@@ -44,7 +44,8 @@
 
 			toggleModal();
 		} catch (error) {
-			err = error.response.data.error.message;
+			let errorMsg = error.response.data.error.message;
+			toast.push(errorMsg);
 		} finally {
 			loading = false;
 		}
@@ -76,7 +77,8 @@
 			fetchNewsTrigger.set('login');
 			toggleModal();
 		} catch (error) {
-			err = error.response.data.error.message;
+			let errorMsg = error.response.data.error.message;
+			toast.push(errorMsg);
 		} finally {
 			loading = false;
 		}
@@ -105,8 +107,6 @@
 			</span>
 		{/if}
 	</div>
-
-	{err}
 	<span class="buttonContainer">
 		<button>{registrationForm ? 'SIGN UP' : 'LOG IN'}</button>
 		{loading ? 'Logging in...' : ''}
