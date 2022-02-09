@@ -15,6 +15,9 @@ export const sidebarOut = writable(false);
 //* currently active sidebar button
 export const activeButton = writable('new');
 
+//* search term
+export const searchTerm = writable('');
+
 //* AUTH
 export const user = writable({});
 export const isAuthed = writable(false);
