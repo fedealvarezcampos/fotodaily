@@ -57,7 +57,9 @@
 
 	const fetchSearched = async (searchValue) => {
 		try {
-			loading = true;
+			if (page === 1) {
+				loading = true;
+			}
 
 			const res = await axios.get(
 				`${hostURL}/api/newsitems?sort=date:DESC&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[title][$containsi]=${searchValue}`
