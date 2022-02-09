@@ -2,6 +2,7 @@
 	import { fly } from 'svelte/transition';
 	import { sidebarOut } from '../stores';
 	import Sorter from './Sorter.svelte';
+	import Search from './Search.svelte';
 
 	$: visible = $sidebarOut;
 </script>
@@ -13,6 +14,7 @@
 	on:outroend={!visible && sidebarOut.set(!$sidebarOut)}
 >
 	<p transition:fly={{ duration: 200, y: -60 }}>Fresh photography news every day!</p>
+	<Search />
 	<Sorter />
 </div>
 

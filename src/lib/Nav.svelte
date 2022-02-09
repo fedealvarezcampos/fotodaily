@@ -2,9 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { isAuthed, fetchNewsTrigger, resetTrigger } from '../stores';
-
-	import Modal from '$lib/Modal.svelte';
-	import AuthForm from '$lib/AuthForm.svelte';
+	import Modal from './Modal.svelte';
+	import AuthForm from './AuthForm.svelte';
 
 	$: currentPath = $page.url.pathname;
 

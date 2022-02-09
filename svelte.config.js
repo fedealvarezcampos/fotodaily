@@ -24,13 +24,3 @@ const config = {
 };
 
 export default config;
-
-// import path from 'path';
-
-// export const sveltekitViteConfig = {
-// 	resolve: {
-// 		alias: {
-// 			$lib: path.resolve('./src/lib')
-// 		}
-// 	}
-// };

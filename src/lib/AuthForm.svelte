@@ -1,8 +1,7 @@
 <script>
-	import { toast } from '@zerodevx/svelte-toast';
-
 	import axios from 'axios';
 	import { hostURL } from '../host';
+	import { toast } from '@zerodevx/svelte-toast';
 	import { isAuthed, fetchNewsTrigger, resetTrigger } from '../stores';
 
 	export let toggleModal;

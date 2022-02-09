@@ -1,10 +1,11 @@
 <script>
-	import { fetchOptions, resetTrigger, activeButton } from '../stores';
+	import { fetchOptions, resetTrigger, activeButton, searchTerm } from '../stores';
 
 	const filterByDate = () => {
 		if ($fetchOptions.filter !== 'date') {
 			activeButton.set('new');
 			resetTrigger.set('date');
+			searchTerm.set('');
 			fetchOptions.set({ order: 'DESC', filter: 'date', page: 1 });
 		}
 	};
@@ -13,6 +14,7 @@
 		if ($fetchOptions.filter !== 'likes') {
 			activeButton.set('popular');
 			resetTrigger.set('likes');
+			searchTerm.set('');
 			fetchOptions.set({ order: 'DESC', filter: 'likes', page: 1 });
 		}
 	};
