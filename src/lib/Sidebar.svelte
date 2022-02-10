@@ -33,6 +33,8 @@
 		background-color: var(--red);
 
 		@media (max-width: 800px) {
+			display: grid;
+			grid: auto / auto auto;
 			gap: 0.8rem;
 			height: fit-content;
 			width: 100vw;
@@ -55,9 +57,13 @@
 			background-color: var(--black);
 
 			@media (max-width: 800px) {
+				display: flex;
+				place-items: center;
+				grid-row: 1 / 3;
+				height: 100%;
 				width: clamp(7rem, 34vw, 12rem);
 				padding: 0.5rem;
-				font-size: 0.6rem;
+				font-size: clamp(0.7rem, 3.4vw, 0.9rem);
 				border-radius: 0 10px 0 0;
 				border-left: 10px double var(--red);
 				border-bottom: unset;
